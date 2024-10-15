@@ -1,17 +1,14 @@
-import { createSSRApp } from 'vue'
-import App from './App.vue'
-import store from './store'
-import { routeInterceptor, requestInterceptor, prototypeInterceptor } from './interceptors'
-import 'virtual:uno.css'
-import '@/style/index.scss'
+import './assets/main.css'
 
-export function createApp() {
-  const app = createSSRApp(App)
-  app.use(store)
-  app.use(routeInterceptor)
-  app.use(requestInterceptor)
-  app.use(prototypeInterceptor)
-  return {
-    app,
-  }
-}
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+
+import App from './App.vue'
+import router from './router'
+
+const app = createApp(App)
+
+app.use(createPinia())
+app.use(router)
+
+app.mount('#app');

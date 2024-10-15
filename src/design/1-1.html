@@ -1,0 +1,219 @@
+<html>
+<head>
+  <style>
+      body {
+          font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;
+          background-color: #fafafa;
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          overflow-x: hidden;
+      }
+
+      .layout-container {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          flex-grow: 1;
+      }
+
+      header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 1px solid #ededed;
+          padding: 12px 40px;
+          white-space: nowrap;
+      }
+
+      header .flex {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          color: #141414;
+      }
+
+      header h2 {
+          font-size: 1.125rem;
+          font-weight: bold;
+          line-height: 1.25;
+          letter-spacing: -0.015em;
+      }
+
+      header a {
+          color: #141414;
+          font-size: 0.875rem;
+          font-weight: 500;
+          line-height: 1.5;
+          text-decoration: none;
+      }
+
+      .button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 2px 10px;
+          border-radius: 12px;
+          height: 40px;
+          background-color: #ededed;
+          color: #141414;
+          font-weight: bold;
+          font-size: 0.875rem;
+          cursor: pointer;
+          gap: 8px;
+      }
+
+      .avatar {
+          background-size: cover;
+          background-position: center;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+      }
+
+      .main-container {
+          display: flex;
+          justify-content: center;
+          padding: 20px 160px;
+          flex-grow: 1;
+      }
+
+      .content-container {
+          display: flex;
+          flex-direction: column;
+          max-width: 960px;
+          flex-grow: 1;
+      }
+
+      .grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
+          gap: 12px;
+          padding: 16px;
+      }
+
+      .grid-item {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+      }
+
+      .aspect-video {
+          position: relative;
+          width: 100%;
+          padding-top: 56.25%; /* 16:9 Aspect Ratio */
+          background-size: cover;
+          background-position: center;
+          border-radius: 12px;
+      }
+
+      .search-bar {
+          display: flex;
+          align-items: stretch;
+          border: 1px solid #dbdbdb;
+          background-color: #fafafa;
+          border-radius: 12px;
+          padding: 0 15px;
+      }
+
+      .search-bar input {
+          border: none;
+          flex-grow: 1;
+          padding-left: 15px;
+          font-size: 0.875rem;
+      }
+
+      .search-bar button {
+          background-color: #cccccc;
+          color: #141414;
+          padding: 10px 20px;
+          border-radius: 12px;
+          font-weight: bold;
+          font-size: 0.875rem;
+          cursor: pointer;
+      }
+
+      .post-button {
+          background-color: #cccccc;
+          color: #141414;
+          padding: 10px 20px;
+          border-radius: 12px;
+          font-weight: bold;
+          font-size: 0.875rem;
+          cursor: pointer;
+      }
+
+      .banner {
+          background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4)), url("https://cdn.usegalileo.ai/sdxl10/0e240d15-3d9f-4a5d-98db-77c5d0c48a75.png");
+          background-size: cover;
+          background-position: center;
+          border-radius: 12px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+          gap: 24px;
+          min-height: 480px;
+      }
+
+      .banner h1 {
+          color: white;
+          font-size: 2.25rem;
+          font-weight: 900;
+          text-align: center;
+          letter-spacing: -0.033em;
+      }
+  </style>
+</head>
+
+<body>
+<div class="layout-container">
+  <header>
+    <div class="flex">
+      <div class="icon">
+        <svg width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z" fill="currentColor"></path>
+        </svg>
+      </div>
+      <h2>LifeClip</h2>
+    </div>
+    <div class="flex">
+      <a href="#">Life Feed</a>
+      <a href="#">Data</a>
+      <a href="#">Media</a>
+      <a href="#">Resources</a>
+      <a href="#">Gaming</a>
+      <div class="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256">
+          <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+        </svg>
+      </div>
+      <div class="avatar" style='background-image: url("https://cdn.usegalileo.ai/stability/aac48c19-c653-412e-b6d6-b016f17cfa88.png");'></div>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <div class="content-container">
+      <div class="banner">
+        <h1>Life Feed</h1>
+        <div class="search-bar">
+          <input type="text" placeholder="Share your life clips">
+          <button class="post-button">Post</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="grid-item">
+      <div class="aspect-video" style='background-image: url("https://cdn.usegalileo.ai/sdxl10/59981070-b14f-4c4a-8695-f70073dc79b7.png");'></div>
+    </div>
+    <div class="grid-item">
+      <div class="aspect-video" style='background-image: url("https://cdn.usegalileo.ai/sdxl10/3211de58-4092-41a4-9cb9-be62b2cd00cb.png");'></div>
+    </div>
+    <!-- Repeat grid items as needed -->
+  </div>
+</div>
+</body>
+</html>
