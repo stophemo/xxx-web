@@ -10,9 +10,9 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/feed',
-      name: 'feed',
-      component: () => import('../views/FeedView.vue')
+      path: '/episode',
+      name: 'episode',
+      component: () => import('../views/EpisodeView.vue')
     },
     {
       path: '/memo',

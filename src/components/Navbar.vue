@@ -8,7 +8,7 @@
     <div class="flex flex-1 justify-end gap-8">
       <nav class="flex items-center gap-9">
         <RouterLink class="text-[#141414] text-sm font-medium leading-normal" to="/">Home</RouterLink>
-        <RouterLink class="text-[#141414] text-sm font-medium leading-normal" to="/feed">Feed</RouterLink>
+        <RouterLink class="text-[#141414] text-sm font-medium leading-normal" to="/episode">Episode</RouterLink>
         <RouterLink class="text-[#141414] text-sm font-medium leading-normal" to="/memo">Memo</RouterLink>
         <RouterLink class="text-[#141414] text-sm font-medium leading-normal" to="/resources">Resources</RouterLink>
         <RouterLink class="text-[#141414] text-sm font-medium leading-normal" to="/about">About</RouterLink>
