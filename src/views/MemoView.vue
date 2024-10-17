@@ -1,10 +1,11 @@
 <template>
-  <div class="MemoView">
+  <NavbarItem class="MemoView">
     This is a MemoView page
-  </div>
+  </NavbarItem>
 </template>
 
 <script setup lang="ts">
+import NavbarItem from '@/components/NavbarItem.vue';
 </script>
 
 <style scoped>
