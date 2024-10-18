@@ -8,10 +8,7 @@
               <div class="@[480px]:p-4">
                 <div
                   class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-start justify-end px-4 pb-10 @[480px]:px-10"
-                  style="
-                    background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%),
-                      url('https://cdn.usegalileo.ai/stability/a16044ba-d1a9-46f1-b25b-1c38555d4734.png');
-                  "
+                  :style="{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url(${getAssetsImg('home-1.png')})`}"
                 >
                   <div class="flex flex-col gap-2 text-left">
                     <h1
@@ -72,9 +69,7 @@
               <div class="flex flex-col gap-3 pb-3">
                 <div
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                  style="
-                    background-image: url('https://cdn.usegalileo.ai/stability/f3f8272c-7d5b-451f-b776-f0c23c3c8392.png');
-                  "
+                  :style="{ backgroundImage: `url(${getAssetsImg('home-2.png')})` }"
                 ></div>
                 <div>
                   <p class="text-[#141414] text-base font-medium leading-normal">
@@ -84,11 +79,8 @@
                 </div>
               </div>
               <div class="flex flex-col gap-3 pb-3">
-                <div
+                <div :style="{ backgroundImage: `url(${getAssetsImg('home-3.png')})`}"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                  style="
-                    background-image: url('https://cdn.usegalileo.ai/stability/55fa4161-8e27-4ad3-8cbf-b1bd2498665d.png');
-                  "
                 ></div>
                 <div>
                   <p class="text-[#141414] text-base font-medium leading-normal">
@@ -98,11 +90,8 @@
                 </div>
               </div>
               <div class="flex flex-col gap-3 pb-3">
-                <div
+                <div :style="{ backgroundImage: `url(${getAssetsImg('home-4.png')})`}"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                  style="
-                    background-image: url('https://cdn.usegalileo.ai/stability/e1e69bfa-cc7a-4a5c-a202-1df3f37e1f63.png');
-                  "
                 ></div>
                 <div>
                   <p class="text-[#141414] text-base font-medium leading-normal">
@@ -112,11 +101,8 @@
                 </div>
               </div>
               <div class="flex flex-col gap-3 pb-3">
-                <div
+                <div :style="{ backgroundImage: `url(${getAssetsImg('home-5.png')})`}"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                  style="
-                    background-image: url('https://cdn.usegalileo.ai/stability/203b7c9f-bf46-42c9-b1cf-00f0bbeb82fb.png');
-                  "
                 ></div>
                 <div>
                   <p class="text-[#141414] text-base font-medium leading-normal">
@@ -131,11 +117,8 @@
             </h2>
             <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
               <div class="flex flex-col gap-3 pb-3">
-                <div
+                <div :style="{ backgroundImage: `url(${getAssetsImg('home-6.png')})`}"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                  style="
-                    background-image: url('https://cdn.usegalileo.ai/stability/6e34d604-c5c8-466c-b531-06d4532401da.png');
-                  "
                 ></div>
                 <div>
                   <p class="text-[#141414] text-base font-medium leading-normal">
@@ -145,11 +128,8 @@
                 </div>
               </div>
               <div class="flex flex-col gap-3 pb-3">
-                <div
+                <div :style="{ backgroundImage: `url(${getAssetsImg('home-7.png')})`}"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                  style="
-                    background-image: url('https://cdn.usegalileo.ai/stability/a2c2e1c7-c5c3-4bba-9285-df379b849c9e.png');
-                  "
                 ></div>
                 <div>
                   <p class="text-[#141414] text-base font-medium leading-normal">
@@ -159,11 +139,8 @@
                 </div>
               </div>
               <div class="flex flex-col gap-3 pb-3">
-                <div
+                <div :style="{ backgroundImage: `url(${getAssetsImg('home-8.png')})`}"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                  style="
-                    background-image: url('https://cdn.usegalileo.ai/stability/8d31d915-30c9-4eea-bf5d-adf9754ddc40.png');
-                  "
                 ></div>
                 <div>
                   <p class="text-[#141414] text-base font-medium leading-normal">
@@ -173,11 +150,8 @@
                 </div>
               </div>
               <div class="flex flex-col gap-3 pb-3">
-                <div
+                <div :style="{ backgroundImage: `url(${getAssetsImg('home-9.png')})`}"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                  style="
-                    background-image: url('https://cdn.usegalileo.ai/stability/12769429-b71a-490c-803e-0e79bdb40043.png');
-                  "
                 ></div>
                 <div>
                   <p class="text-[#141414] text-base font-medium leading-normal">
@@ -192,11 +166,8 @@
             </h2>
             <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
               <div class="flex flex-col gap-3 pb-3">
-                <div
+                <div :style="{ backgroundImage: `url(${getAssetsImg('home-10.png')})`}"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                  style="
-                    background-image: url('https://cdn.usegalileo.ai/stability/08722f0f-9469-44fc-8d44-6aee6f92d468.png');
-                  "
                 ></div>
                 <div>
                   <p class="text-[#141414] text-base font-medium leading-normal">
@@ -206,11 +177,8 @@
                 </div>
               </div>
               <div class="flex flex-col gap-3 pb-3">
-                <div
+                <div :style="{ backgroundImage: `url(${getAssetsImg('home-11.png')})`}"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                  style="
-                    background-image: url('https://cdn.usegalileo.ai/stability/5c7a8684-2b8e-4e4c-a5c2-72dcada82676.png');
-                  "
                 ></div>
                 <div>
                   <p class="text-[#141414] text-base font-medium leading-normal">
@@ -220,11 +188,8 @@
                 </div>
               </div>
               <div class="flex flex-col gap-3 pb-3">
-                <div
+                <div :style="{ backgroundImage: `url(${getAssetsImg('home-12.png')})`}"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                  style="
-                    background-image: url('https://cdn.usegalileo.ai/stability/258a9e53-2919-43dc-92ac-1954da12cd48.png');
-                  "
                 ></div>
                 <div>
                   <p class="text-[#141414] text-base font-medium leading-normal">
@@ -234,11 +199,8 @@
                 </div>
               </div>
               <div class="flex flex-col gap-3 pb-3">
-                <div
+                <div :style="{ backgroundImage: `url(${getAssetsImg('home-13.png')})`}"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                  style="
-                    background-image: url('https://cdn.usegalileo.ai/stability/21c82aa5-cfa9-42dc-add7-675756874042.png');
-                  "
                 ></div>
                 <div>
                   <p class="text-[#141414] text-base font-medium leading-normal">
@@ -256,12 +218,12 @@
 </template>
 
 <script setup lang="ts">
-import NavbarItem from '@/components/NavbarItem.vue';
+import NavbarItem from '@/components/NavBarItem.vue';
 import MemoService from '@/api/memoService';
 import { onMounted } from 'vue';
+import { getAssetsImg } from '@/util/utils';
 
 onMounted(() => {
-  console.log('Hello World');
   MemoService.get('admin');
 });
 </script>

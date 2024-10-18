@@ -1,5 +1,7 @@
 <template>
-  <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#ededed] px-10 py-3">
+  <header
+    class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#ededed] px-10 py-3"
+  >
     <div class="flex items-center gap-4 text-[#141414]">
       <WaveflagIcon />
       <h2 class="text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em]">Home</h2>
@@ -20,7 +22,7 @@
       </div>
       <div
         class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
-        style="background-image: url('https://cdn.usegalileo.ai/stability/aac48c19-c653-412e-b6d6-b016f17cfa88.png')"
+        :style="{ backgroundImage: `url(${getAssetsImg('nav-1.png')})` }"
       ></div>
     </div>
   </header>
@@ -31,7 +33,7 @@ import BellIcon from '@/components/icons/IconBell.vue';
 import SearchIcon from '@/components/icons/IconSearch.vue';
 import WaveflagIcon from '@/components/icons/IconWaveflag.vue';
 import GridIcon from '@/components/icons/IconGrid.vue';
+import { getAssetsImg } from '@/util/utils';
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

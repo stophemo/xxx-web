@@ -7,5 +7,5 @@
 <style>
 </style>
 <script setup lang="ts">
-import NavbarItem from '@/components/NavbarItem.vue';
+import NavbarItem from '@/components/NavBarItem.vue';
 </script>

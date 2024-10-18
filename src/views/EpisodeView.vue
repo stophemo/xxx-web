@@ -6,10 +6,9 @@
           <div class="@[480px]:p-4">
             <div
               class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4"
-              style="
-                background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%),
-                  url('https://cdn.usegalileo.ai/sdxl10/0e240d15-3d9f-4a5d-98db-77c5d0c48a75.png');
-              "
+              :style="{
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url(${getAssetsImg('episode-1.png')})`,
+              }"
             >
               <h1
                 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] text-center"
@@ -59,77 +58,73 @@
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              style="background-image: url('https://cdn.usegalileo.ai/sdxl10/59981070-b14f-4c4a-8695-f70073dc79b7.png')"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-2.png')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              style="background-image: url('https://cdn.usegalileo.ai/sdxl10/3211de58-4092-41a4-9cb9-be62b2cd00cb.png')"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-3.png')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              style="background-image: url('https://cdn.usegalileo.ai/sdxl10/83ad1484-62c3-4313-afde-92b0b5418c7c.png')"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-4.png')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              style="
-                background-image: url('https://cdn.usegalileo.ai/stability/5a7433c8-7594-440f-8b3c-8937bccc11fe.png');
-              "
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-5.png')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              style="background-image: url('https://cdn.usegalileo.ai/sdxl10/69c3cf5a-bb0a-47d8-8665-bf0b2cd4545d.png')"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-6.png')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              style="
-                background-image: url('https://cdn.usegalileo.ai/stability/68478713-9592-4908-a047-f8da939c3051.png');
-              "
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-7.png')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              style="background-image: url('https://cdn.usegalileo.ai/sdxl10/ddb647d3-ea92-4db0-980c-2bfa9533de73.png')"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-8.png')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              style="background-image: url('https://cdn.usegalileo.ai/sdxl10/99636822-c79b-4860-b2f3-c9d470c5de09.png')"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-9.png')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              style="background-image: url('https://cdn.usegalileo.ai/sdxl10/d68de8b9-0c31-4697-b79f-6cba64f29c1e.png')"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-10.png')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              style="background-image: url('https://cdn.usegalileo.ai/sdxl10/c601180b-b933-4641-855b-3fc6c4988418.png')"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-11.png')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              style="background-image: url('https://cdn.usegalileo.ai/sdxl10/61a6b93f-2ecb-41a7-9068-39d7489c95c4.png')"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-12.png')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              style="background-image: url('https://cdn.usegalileo.ai/sdxl10/7c797b6d-a70b-44d2-b2a7-627f2c828d72.png')"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-13.png')})` }"
             ></div>
           </div>
         </div>
@@ -148,7 +143,8 @@
 </template>
 
 <script setup lang="ts">
-import NavbarItem from '@/components/NavbarItem.vue';
+import NavbarItem from '@/components/NavBarItem.vue';
+import { getAssetsImg } from '@/util/utils';
 </script>
 
 <style scoped></style>

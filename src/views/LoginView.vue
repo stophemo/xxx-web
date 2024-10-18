@@ -71,13 +71,20 @@ import { ref } from 'vue';
 import IconDiamond from '@/components/icons/IconDiamond.vue';
 import LoginService from '@/api/loginService'
 import router from '@/router';
+import { onMounted } from 'vue';
 
 const username = ref('');
 const password = ref('');
 const onLogin = () => {
-  LoginService.login(username.value, password.value);
-  router.push('/');
+  LoginService.login(username.value, password.value)
+    .then(() => {
+      router.push('/');
+    })
 }
+
+onMounted(() => {
+  console.log('push to login page')
+});
 </script>
 
 <style scoped>

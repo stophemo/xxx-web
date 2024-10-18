@@ -1,11 +1,11 @@
 <template>
   <NavbarItem class="MemoView">
-    This is a MemoView page
+    <div class="-col-end-2 aria-disabled: z-30"></div>
   </NavbarItem>
 </template>
 
 <script setup lang="ts">
-import NavbarItem from '@/components/NavbarItem.vue';
+import NavbarItem from '@/components/NavBarItem.vue';
 </script>
 
 <style scoped>
