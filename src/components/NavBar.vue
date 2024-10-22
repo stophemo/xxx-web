@@ -21,19 +21,45 @@
         <BellIcon />
       </div>
       <div
-        class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+        class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 relative cursor-pointer"
         :style="{ backgroundImage: `url(${getAssetsImg('nav-1.png')})` }"
-      ></div>
+        @click="toggleDropdown"
+      >
+        <ul v-if="dropdownVisible" class="flex justify-center absolute right-0 top-14 z-[999] bg-white border rounded-2xl cursor-auto shadow-md w-28">
+          <li class="px-4 py-2 text-sm text-gray-700 cursor-pointer pl" @click="logout">注销</li>
+        </ul>
+      </div>
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
-import BellIcon from '@/components/icons/IconBell.vue';
-import SearchIcon from '@/components/icons/IconSearch.vue';
-import WaveflagIcon from '@/components/icons/IconWaveflag.vue';
-import GridIcon from '@/components/icons/IconGrid.vue';
-import { getAssetsImg } from '@/util/utils';
+  import BellIcon from '@/components/icons/IconBell.vue';
+  import SearchIcon from '@/components/icons/IconSearch.vue';
+  import WaveflagIcon from '@/components/icons/IconWaveflag.vue';
+  import GridIcon from '@/components/icons/IconGrid.vue';
+  import { getAssetsImg } from '@/util/utils';
+  import { useRouter } from 'vue-router';
+  import loginService from '@/api/loginService';
+  import { ref } from 'vue';
+
+  const router = useRouter();
+  const dropdownVisible = ref(false);
+
+  const toggleDropdown = () => {
+    dropdownVisible.value = !dropdownVisible.value;
+  };
+
+  const logout = async () => {
+    try {
+      await loginService.logout();
+      router.push('/login');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
 </script>
 
-<style scoped></style>
+<style scoped>
+  /* Add any additional styles here if needed */
+</style>

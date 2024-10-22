@@ -60,32 +60,55 @@
       <!-- Sign up link -->
       <div class="mt-6 text-center text-sm text-gray-500">
         Don't have an account?
-        <a href="#" class="text-gray-900 hover:underline">Sign up here</a>
+        <a href="#" class="text-gray-900 hover:underline" @click="onSignup">Sign up here</a>
       </div>
     </div>
   </main>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import IconDiamond from '@/components/icons/IconDiamond.vue';
-import LoginService from '@/api/loginService'
-import router from '@/router';
-import { onMounted } from 'vue';
+  import { ref, onMounted } from 'vue';
+  import IconDiamond from '@/components/icons/IconDiamond.vue';
+  import loginService from '@/api/loginService';
+  import router from '@/router';
+  import { ElMessage } from 'element-plus';
 
-const username = ref('');
-const password = ref('');
-const onLogin = () => {
-  LoginService.login(username.value, password.value)
-    .then(() => {
-      router.push('/');
-    })
-}
+  const username = ref('');
+  const password = ref('');
 
-onMounted(() => {
-  console.log('push to login page')
-});
+  const onLogin = () => {
+    try {
+      loginService.login(username.value, password.value).then(() => {
+        router.push('/');
+      });
+    } catch (error) {
+      console.error('登录失败：', error);
+      ElMessage.error({
+        message: '登录失败',
+        duration: 5 * 1000,
+      });
+    }
+  };
+
+  const onSignup = (event: Event) => {
+    event.preventDefault();
+    router.push('/register');
+  };
+
+  onMounted(async () => {
+    try {
+      const userInfo = await loginService.getCurrentUserInfo();
+      if (userInfo.isLogin) {
+        await router.push('/');
+      }
+    } catch (error) {
+      console.error('获取当前用户信息失败：', error);
+      ElMessage.error({
+        message: '获取当前用户信息失败',
+        duration: 5 * 1000,
+      });
+    }
+  });
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

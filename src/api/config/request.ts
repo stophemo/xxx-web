@@ -39,7 +39,7 @@ service.interceptors.request.use(
   },
   (error) => {
     console.log(error);
-    return  Promise.reject(error);
+    return Promise.reject(error);
   },
 );
 
