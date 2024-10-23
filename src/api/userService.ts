@@ -1,6 +1,6 @@
 import service from './config/request';
 
-const loginService = {
+const userService = {
   async register(inputDTO: UserAddInputDTO): Promise<void> {
     await service.post('/api/user/register', inputDTO);
   },
@@ -35,7 +35,7 @@ const loginService = {
   },
 };
 
-export default loginService;
+export default userService;
 
 export interface UserAddInputDTO {
   email: string;
@@ -74,4 +74,14 @@ export interface UserInfoGetOutputDTO {
   loginDevice: string;
   tag: string;
   alistToken: string;
+  id: string;
+  email: string;
+  phone: string;
+  name: string;
+  nickname: string;
+  gender: number;
+  avatar: string;
+  status: boolean;
+  ordinal: number;
+  role: string;
 }

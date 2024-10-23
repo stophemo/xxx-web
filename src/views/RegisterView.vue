@@ -17,10 +17,11 @@
       <!-- Registration Form Container -->
       <div class="bg-white px-8 py-10 rounded-lg shadow-sm border border-gray-300">
         <h2 class="text-2xl font-bold text-center mb-6 text-gray-900">Register</h2>
-
         <!-- Name Field -->
         <div class="mb-3">
-          <label for="name" class="block text-sm text-gray-700">Name <span class="text-red-500">*</span></label>
+          <label for="name" class="block text-sm text-gray-700"
+            >Name <span class="text-red-500">*</span></label
+          >
           <input
             v-model="name"
             id="name"
@@ -30,10 +31,11 @@
             required
           />
         </div>
-
         <!-- Password Field -->
         <div class="mb-3">
-          <label for="password" class="block text-sm text-gray-700">Password <span class="text-red-500">*</span></label>
+          <label for="password" class="block text-sm text-gray-700"
+            >Password <span class="text-red-500">*</span></label
+          >
           <input
             v-model="password"
             id="password"
@@ -43,10 +45,11 @@
             required
           />
         </div>
-
         <!-- Phone Field -->
         <div class="mb-3">
-          <label for="phone" class="block text-sm text-gray-700">Phone <span class="text-red-500">*</span></label>
+          <label for="phone" class="block text-sm text-gray-700"
+            >Phone <span class="text-red-500">*</span></label
+          >
           <input
             v-model="phone"
             id="phone"
@@ -56,7 +59,6 @@
             required
           />
         </div>
-
         <!-- Email Field -->
         <div class="mb-3">
           <label for="email" class="block text-sm text-gray-700">Email (Optional)</label>
@@ -68,20 +70,16 @@
             placeholder="Enter email (optional)"
           />
         </div>
-
-
         <!-- Avatar Field (Optional) -->
         <div class="mb-3">
-          <label for="avatar" class="block text-sm text-gray-700">Avatar URL (Optional)</label>
+          <label for="avatar" class="block text-sm text-gray-700">Avatar (Optional)</label>
           <input
-            v-model="avatar"
-            id="avatar"
-            type="text"
+            type="file"
+            @change="onAvatarChange"
+            id="avatarUpload"
             class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-gray-700"
-            placeholder="Enter avatar (optional)"
           />
         </div>
-
         <!-- Register Button -->
         <button
           type="submit"
@@ -104,9 +102,10 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
   import IconDiamond from '@/components/icons/IconDiamond.vue';
-  import loginService from '@/api/loginService';
+  import userService from '@/api/userService';
   import router from '@/router';
   import { ElMessage } from 'element-plus';
+  import fileService, { type FileInfoGetOutputDTO } from '@/api/fileService';
 
   const email = ref('');
   const phone = ref('');
@@ -114,7 +113,7 @@
   const nickname = ref('');
   const password = ref('');
   const gender = ref(0);
-  const avatar = ref('');
+  let avatar = ref('');
   const role = ref('user');
 
   const onRegister = () => {
@@ -129,7 +128,7 @@
       role: role.value,
     };
 
-    loginService
+    userService
       .register(userData)
       .then(() => {
         ElMessage.success({
@@ -150,6 +149,40 @@
   const onLogin = (event: Event) => {
     event.preventDefault();
     router.push('/login');
+  };
+
+  const onAvatarChange = (event: Event) => {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files && inputElement.files.length > 0) {
+      const file = inputElement.files[0];
+      const filePath = `/tencent/xxx/server/images/${file.name}`;
+      fileService
+        .uploadFileByForm(false, filePath, file)
+        .then(async () => {
+          const fileInfo: FileInfoGetOutputDTO = await fileService.getFileInfo({
+            page: 1,
+            perPage: 0,
+            password: '',
+            path: filePath,
+            refresh: false,
+          })
+          console.log(filePath);
+          console.log(fileInfo);
+          console.log(fileInfo.raw_url);
+          if (fileInfo && fileInfo.raw_url) {
+            avatar.value = fileInfo.raw_url;
+            ElMessage.success('头像上传成功');
+            console.log("上传成功");
+          } else {
+            ElMessage.error('无法获取头像 URL');
+            console.log("上传失败");
+          }
+        })
+        .catch((error) => {
+          console.error('上传头像时发生错误：', error);
+          ElMessage.error('头像上传失败，请稍后重试');
+        });
+    }
   };
 </script>
 

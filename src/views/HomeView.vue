@@ -219,13 +219,8 @@
 
 <script setup lang="ts">
 import NavbarItem from '@/components/NavBarItem.vue';
-import MemoService from '@/api/memoService';
-import { onMounted } from 'vue';
 import { getAssetsImg } from '@/util/utils';
 
-onMounted(() => {
-  MemoService.get('admin');
-});
 </script>
 
 <style scoped></style>

@@ -6,6 +6,12 @@
 
 <script setup lang="ts">
 import NavbarItem from '@/components/NavBarItem.vue';
+import { onMounted } from 'vue';
+import MemoService from '@/api/memoService';
+
+onMounted(() => {
+  MemoService.get('admin');
+});
 </script>
 
 <style scoped>

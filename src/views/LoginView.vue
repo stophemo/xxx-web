@@ -69,7 +69,7 @@
 <script lang="ts" setup>
   import { ref, onMounted } from 'vue';
   import IconDiamond from '@/components/icons/IconDiamond.vue';
-  import loginService from '@/api/loginService';
+  import userService from '@/api/userService';
   import router from '@/router';
   import { ElMessage } from 'element-plus';
 
@@ -78,7 +78,7 @@
 
   const onLogin = () => {
     try {
-      loginService.login(username.value, password.value).then(() => {
+      userService.login(username.value, password.value).then(() => {
         router.push('/');
       });
     } catch (error) {
@@ -97,7 +97,7 @@
 
   onMounted(async () => {
     try {
-      const userInfo = await loginService.getCurrentUserInfo();
+      const userInfo = await userService.getCurrentUserInfo();
       if (userInfo.isLogin) {
         await router.push('/');
       }
