@@ -50,15 +50,15 @@ export interface UserAddInputDTO {
 
 export interface UserUpdateInputDTO {
   id: string;
-  email: string;
-  phone: string;
-  name: string;
-  nickname: string;
-  gender: number;
-  avatar: string;
-  status: boolean;
-  ordinal: number;
-  role: string;
+  email?: string;
+  phone?: string;
+  name?: string;
+  nickname?: string;
+  gender?: number;
+  avatar?: string;
+  status?: boolean;
+  ordinal?: number;
+  role?: string;
 }
 
 export interface UserInfoGetOutputDTO {

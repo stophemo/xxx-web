@@ -35,12 +35,7 @@
         :style="{ backgroundImage: `url(${avatar})` }"
         @click="toggleDropdown"
       >
-        <ul
-          v-if="dropdownVisible"
-          class="flex justify-center absolute right-0 top-14 z-[999] bg-white border rounded-2xl cursor-auto shadow-md w-28"
-        >
-          <li class="px-4 py-2 text-sm text-gray-700 cursor-pointer" @click="logout">注销</li>
-        </ul>
+        <AvatarDialog v-if="dropdownVisible" v-click-outside="closeDropdown" :updateAvatar="updateAvatar" />
       </div>
     </div>
   </header>
@@ -51,39 +46,54 @@
   import SearchIcon from '@/components/icons/IconSearch.vue';
   import WaveflagIcon from '@/components/icons/IconWaveflag.vue';
   import GridIcon from '@/components/icons/IconGrid.vue';
-  import { useRouter } from 'vue-router';
   import userService from '@/api/userService';
   import { onBeforeMount, ref } from 'vue';
-  import { checkImgExists, getAssetsImg, getWebImg } from '@/util/utils';
+  import { getAssetsImg, getWebImg } from '@/util/utils';
+  import AvatarDialog from '@/components/AvatarDialog.vue';
+  import { type UserInfo, useUserStore } from '@/stores/userStore';
 
-  const router = useRouter();
   const dropdownVisible = ref<boolean>(false);
 
   const toggleDropdown = () => {
     dropdownVisible.value = !dropdownVisible.value;
-    console.log(dropdownVisible.value);
+    console.log('切换成功');
   };
 
-  const logout = async () => {
-    try {
-      await userService.logout();
-      await router.push('/login');
-    } catch (error) {
-      console.error('Logout failed:', error);
-    }
+  const closeDropdown = () => {
+    dropdownVisible.value = false;
+    console.log('关闭成功');
   };
 
   const avatar = ref<string>('');
 
+  const updateAvatar = (newAvatarUrl: string) => {
+    avatar.value = newAvatarUrl;
+    console.log('修改成功');
+  };
+
   onBeforeMount(async () => {
-    let userInfo = await userService.getCurrentUserInfo();
-    if (userInfo && userInfo.avatar) {
-      avatar.value = userInfo.avatar;
+    let currentUserInfo = await userService.getCurrentUserInfo();
+    if (currentUserInfo) {
+      const userInfo: UserInfo = {
+        id: currentUserInfo.id,
+        email: currentUserInfo.email,
+        phone: currentUserInfo.phone,
+        name: currentUserInfo.name,
+        nickname: currentUserInfo.nickname,
+        gender: currentUserInfo.gender,
+        avatar: currentUserInfo.avatar,
+        status: currentUserInfo.status,
+        ordinal: currentUserInfo.ordinal,
+        role: currentUserInfo.role,
+      };
+      useUserStore().setUserInfo(userInfo);
+    }
+
+    if (currentUserInfo && currentUserInfo.avatar) {
+      avatar.value = currentUserInfo.avatar;
     }
     avatar.value = getWebImg(avatar.value, getAssetsImg('nav-1.png'));
   });
 </script>
 
-<style scoped>
-  /* Add any additional styles here if needed */
-</style>
+<style scoped></style>

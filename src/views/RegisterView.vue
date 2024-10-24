@@ -155,7 +155,7 @@
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length > 0) {
       const file = inputElement.files[0];
-      const filePath = `/tencent/xxx/server/images/${file.name}`;
+      const filePath = `/tencent/xxx/server/images/${file.name}_${Date.now()}`;
       fileService
         .uploadFileByForm(false, filePath, file)
         .then(async () => {
@@ -166,9 +166,6 @@
             path: filePath,
             refresh: false,
           })
-          console.log(filePath);
-          console.log(fileInfo);
-          console.log(fileInfo.raw_url);
           if (fileInfo && fileInfo.raw_url) {
             avatar.value = fileInfo.raw_url;
             ElMessage.success('头像上传成功');
