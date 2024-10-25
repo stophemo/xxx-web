@@ -18,14 +18,12 @@
                     <h1
                       class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
                     >
-                      Hey, I'm Alex
+                      {{home.title}}
                     </h1>
                     <h2
                       class="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal"
                     >
-                      I am a software engineer, YouTuber, and creator. This is my digital garden,
-                      where I grow ideas and share what I learn. Explore the site to see videos,
-                      blog posts, resources, and more!
+                      {{home.content}}
                     </h2>
                   </div>
                   <label class="flex flex-col min-w-40 h-14 w-full max-w-[480px] @[480px]:h-16">
@@ -75,8 +73,8 @@
             <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
               <div class="flex flex-col gap-3 pb-3">
                 <div
-                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
                   :style="{ backgroundImage: `url(${getAssetsImg('home-2')})` }"
+                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
                 ></div>
                 <div>
                   <p class="text-[#141414] text-base font-medium leading-normal">
@@ -242,6 +240,12 @@
 <script setup lang="ts">
   import NavbarItem from '@/components/NavBarItem.vue';
   import { getAssetsImg } from '@/util/utils';
+  import { ref } from 'vue';
+
+  const home = ref({
+    content: 'I am a software engineer, YouTuber, and creator. This is my digital garden,where I grow ideas and share what I learn. Explore the site to see videos,blog posts, resources, and more!',
+    title: "Hey, I'm Alex"
+  })
 </script>
 
 <style scoped></style>
