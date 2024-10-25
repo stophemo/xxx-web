@@ -18,12 +18,12 @@
                     <h1
                       class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
                     >
-                      {{home.title}}
+                      {{ home.title }}
                     </h1>
                     <h2
                       class="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal"
                     >
-                      {{home.content}}
+                      {{ home.content }}
                     </h2>
                   </div>
                   <label class="flex flex-col min-w-40 h-14 w-full max-w-[480px] @[480px]:h-16">
@@ -34,17 +34,7 @@
                         data-size="20px"
                         data-weight="regular"
                       >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="20px"
-                          height="20px"
-                          fill="currentColor"
-                          viewBox="0 0 256 256"
-                        >
-                          <path
-                            d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
-                          ></path>
-                        </svg>
+                        <Search class="w-5 h-5"/>
                       </div>
                       <input
                         placeholder="Search..."
@@ -65,171 +55,12 @@
                 </div>
               </div>
             </div>
-            <h2
-              class="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5"
-            >
-              Featured Content
-            </h2>
-            <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
-              <div class="flex flex-col gap-3 pb-3">
-                <div
-                  :style="{ backgroundImage: `url(${getAssetsImg('home-2')})` }"
-                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                ></div>
-                <div>
-                  <p class="text-[#141414] text-base font-medium leading-normal">
-                    How to Learn Anything... Fast - Josh Kaufman
-                  </p>
-                  <p class="text-neutral-500 text-sm font-normal leading-normal">TED</p>
-                </div>
-              </div>
-              <div class="flex flex-col gap-3 pb-3">
-                <div
-                  :style="{ backgroundImage: `url(${getAssetsImg('home-3')})` }"
-                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                ></div>
-                <div>
-                  <p class="text-[#141414] text-base font-medium leading-normal">
-                    How to Learn Anything... Fast - Josh Kaufman
-                  </p>
-                  <p class="text-neutral-500 text-sm font-normal leading-normal">TED</p>
-                </div>
-              </div>
-              <div class="flex flex-col gap-3 pb-3">
-                <div
-                  :style="{ backgroundImage: `url(${getAssetsImg('home-4')})` }"
-                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                ></div>
-                <div>
-                  <p class="text-[#141414] text-base font-medium leading-normal">
-                    How to Learn Anything... Fast - Josh Kaufman
-                  </p>
-                  <p class="text-neutral-500 text-sm font-normal leading-normal">TED</p>
-                </div>
-              </div>
-              <div class="flex flex-col gap-3 pb-3">
-                <div
-                  :style="{ backgroundImage: `url(${getAssetsImg('home-5')})` }"
-                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                ></div>
-                <div>
-                  <p class="text-[#141414] text-base font-medium leading-normal">
-                    How to Learn Anything... Fast - Josh Kaufman
-                  </p>
-                  <p class="text-neutral-500 text-sm font-normal leading-normal">TED</p>
-                </div>
-              </div>
-            </div>
-            <h2
-              class="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5"
-            >
-              Resources
-            </h2>
-            <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
-              <div class="flex flex-col gap-3 pb-3">
-                <div
-                  :style="{ backgroundImage: `url(${getAssetsImg('home-6')})` }"
-                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                ></div>
-                <div>
-                  <p class="text-[#141414] text-base font-medium leading-normal">
-                    How to Learn Anything... Fast - Josh Kaufman
-                  </p>
-                  <p class="text-neutral-500 text-sm font-normal leading-normal">TED</p>
-                </div>
-              </div>
-              <div class="flex flex-col gap-3 pb-3">
-                <div
-                  :style="{ backgroundImage: `url(${getAssetsImg('home-7')})` }"
-                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                ></div>
-                <div>
-                  <p class="text-[#141414] text-base font-medium leading-normal">
-                    How to Learn Anything... Fast - Josh Kaufman
-                  </p>
-                  <p class="text-neutral-500 text-sm font-normal leading-normal">TED</p>
-                </div>
-              </div>
-              <div class="flex flex-col gap-3 pb-3">
-                <div
-                  :style="{ backgroundImage: `url(${getAssetsImg('home-8')})` }"
-                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                ></div>
-                <div>
-                  <p class="text-[#141414] text-base font-medium leading-normal">
-                    How to Learn Anything... Fast - Josh Kaufman
-                  </p>
-                  <p class="text-neutral-500 text-sm font-normal leading-normal">TED</p>
-                </div>
-              </div>
-              <div class="flex flex-col gap-3 pb-3">
-                <div
-                  :style="{ backgroundImage: `url(${getAssetsImg('home-9')})` }"
-                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                ></div>
-                <div>
-                  <p class="text-[#141414] text-base font-medium leading-normal">
-                    How to Learn Anything... Fast - Josh Kaufman
-                  </p>
-                  <p class="text-neutral-500 text-sm font-normal leading-normal">TED</p>
-                </div>
-              </div>
-            </div>
-            <h2
-              class="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5"
-            >
-              Recent Posts
-            </h2>
-            <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
-              <div class="flex flex-col gap-3 pb-3">
-                <div
-                  :style="{ backgroundImage: `url(${getAssetsImg('home-10')})` }"
-                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                ></div>
-                <div>
-                  <p class="text-[#141414] text-base font-medium leading-normal">
-                    How to Learn Anything... Fast - Josh Kaufman
-                  </p>
-                  <p class="text-neutral-500 text-sm font-normal leading-normal">TED</p>
-                </div>
-              </div>
-              <div class="flex flex-col gap-3 pb-3">
-                <div
-                  :style="{ backgroundImage: `url(${getAssetsImg('home-11')})` }"
-                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                ></div>
-                <div>
-                  <p class="text-[#141414] text-base font-medium leading-normal">
-                    How to Learn Anything... Fast - Josh Kaufman
-                  </p>
-                  <p class="text-neutral-500 text-sm font-normal leading-normal">TED</p>
-                </div>
-              </div>
-              <div class="flex flex-col gap-3 pb-3">
-                <div
-                  :style="{ backgroundImage: `url(${getAssetsImg('home-12')})` }"
-                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                ></div>
-                <div>
-                  <p class="text-[#141414] text-base font-medium leading-normal">
-                    How to Learn Anything... Fast - Josh Kaufman
-                  </p>
-                  <p class="text-neutral-500 text-sm font-normal leading-normal">TED</p>
-                </div>
-              </div>
-              <div class="flex flex-col gap-3 pb-3">
-                <div
-                  :style="{ backgroundImage: `url(${getAssetsImg('home-13')})` }"
-                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                ></div>
-                <div>
-                  <p class="text-[#141414] text-base font-medium leading-normal">
-                    How to Learn Anything... Fast - Josh Kaufman
-                  </p>
-                  <p class="text-neutral-500 text-sm font-normal leading-normal">TED</p>
-                </div>
-              </div>
-            </div>
+            <CardBar
+              v-for="(item, index) in cardData"
+              :key="index"
+              :title="item.title"
+              :items="item.cards"
+            />
           </div>
         </div>
       </div>
@@ -241,11 +72,92 @@
   import NavbarItem from '@/components/NavBarItem.vue';
   import { getAssetsImg } from '@/util/utils';
   import { ref } from 'vue';
+  import CardBar from '@/components/CardBar.vue';
+  import { Search } from '@element-plus/icons-vue';
 
   const home = ref({
-    content: 'I am a software engineer, YouTuber, and creator. This is my digital garden,where I grow ideas and share what I learn. Explore the site to see videos,blog posts, resources, and more!',
-    title: "Hey, I'm Alex"
-  })
+    content:
+      'I am a software engineer, YouTuber, and creator. This is my digital garden,where I grow ideas and share what I learn. Explore the site to see videos,blog posts, resources, and more!',
+    title: "Hey, I'm Alex",
+  });
+
+  const cardData = ref([
+    {
+      title: 'Featured Content',
+      cards: [
+        {
+          title: 'How to Learn Anything... Fast - Josh Kaufman',
+          description: 'TED',
+          imageUrl: getAssetsImg('home-2'),
+        },
+        {
+          title: 'How to Learn Anything... Fast - Josh Kaufman',
+          description: 'TED',
+          imageUrl: getAssetsImg('home-3'),
+        },
+        {
+          title: 'How to Learn Anything... Fast - Josh Kaufman',
+          description: 'TED',
+          imageUrl: getAssetsImg('home-4'),
+        },
+        {
+          title: 'How to Learn Anything... Fast - Josh Kaufman',
+          description: 'TED',
+          imageUrl: getAssetsImg('home-5'),
+        },
+      ],
+    },
+    {
+      title: 'Resources',
+      cards: [
+        {
+          title: 'How to Learn Anything... Fast - Josh Kaufman',
+          description: 'TED',
+          imageUrl: getAssetsImg('home-6'),
+        },
+        {
+          title: 'How to Learn Anything... Fast - Josh Kaufman',
+          description: 'TED',
+          imageUrl: getAssetsImg('home-7'),
+        },
+        {
+          title: 'How to Learn Anything... Fast - Josh Kaufman',
+          description: 'TED',
+          imageUrl: getAssetsImg('home-8'),
+        },
+        {
+          title: 'How to Learn Anything... Fast - Josh Kaufman',
+          description: 'TED',
+          imageUrl: getAssetsImg('home-9'),
+        },
+      ],
+    },
+    {
+      title: 'Recent Posts',
+      cards: [
+        {
+          title: 'How to Learn Anything... Fast - Josh Kaufman',
+          description: 'TED',
+          imageUrl: getAssetsImg('home-10'),
+        },
+        {
+          title: 'How to Learn Anything... Fast - Josh Kaufman',
+          description: 'TED',
+          imageUrl: getAssetsImg('home-11'),
+        },
+        {
+          title: 'How to Learn Anything... Fast - Josh Kaufman',
+          description: 'TED',
+          imageUrl: getAssetsImg('home-12'),
+        },
+        {
+          title: 'How to Learn Anything... Fast - Josh Kaufman',
+          description: 'TED',
+          imageUrl: getAssetsImg('home-13'),
+        },
+      ],
+    },
+  ]);
 </script>
 
 <style scoped></style>

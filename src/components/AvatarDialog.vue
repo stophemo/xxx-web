@@ -15,6 +15,7 @@
   import fileService from '@/api/fileService';
   import { useUserStore } from '@/stores/userStore';
   import { ElMessage } from 'element-plus';
+  import Compressor from 'compressorjs';
 
   const logout = async () => {
     try {
@@ -47,30 +48,56 @@
         ElMessage.error('未选择文件');
         return;
       }
-      // 生成文件路径
-      const filePath = `/tencent/xxx/server/images/${file.name}_${Date.now()}`;
-      // 上传文件
-      await fileService.uploadFileByForm(false, filePath, file);
-      // 获取文件信息
-      const fileInfo = await fileService.getFileInfo({
-        page: 1,
-        perPage: 0,
-        password: '',
-        path: filePath,
-        refresh: false,
-      });
-      // 检查文件信息并更新用户头像
-      if (fileInfo?.raw_url) {
-        const userInfoInput: UserUpdateInputDTO = {
-          id: useUserStore().userInfo?.id ?? '',
-          avatar: fileInfo.raw_url,
-        };
-        await userService.updateUserInfo(userInfoInput);
-        props.updateAvatar(fileInfo.raw_url);
-        ElMessage.success('头像上传成功');
-      } else {
-        ElMessage.error('无法获取头像 URL');
+      // 校验图片大小，例如限制为 5MB
+      if (file.size > 5 * 1024 * 1024) {
+        ElMessage.error('图片大小超过限制（5MB）');
+        return;
       }
+      new Compressor(file, {
+        quality: 0.5,
+        strict: true,
+        maxWidth: 500,
+        maxHeight: 500,
+        minWidth: 100,
+        minHeight: 100,
+        mimeType: 'image/webp',
+        convertSize: 1024,
+        success(result) {
+          let newfile = new File([result], file.name, { type: file.type });
+          // 生成文件路径
+          const filePath = `/tencent/xxx/server/images/${Date.now()}_${file.name}`;
+          // 上传文件
+          fileService.uploadFileByForm(false, filePath, newfile).then(() => {
+            // 获取文件信息
+            fileService
+              .getFileInfo({
+                page: 1,
+                perPage: 0,
+                password: '',
+                path: filePath,
+                refresh: false,
+              })
+              .then((fileInfo) => {
+                // 检查文件信息并更新用户头像
+                if (fileInfo?.raw_url) {
+                  const userInfoInput: UserUpdateInputDTO = {
+                    id: useUserStore().userInfo?.id ?? '',
+                    avatar: fileInfo.raw_url,
+                  };
+                  userService.updateUserInfo(userInfoInput);
+                  props.updateAvatar(fileInfo.raw_url);
+                  ElMessage.success('头像上传成功');
+                } else {
+                  ElMessage.error('无法获取头像 URL');
+                }
+              });
+          });
+        },
+        error(err) {
+          console.log(err.message);
+          ElMessage.error('文件上传过程中出现错误');
+        },
+      });
     } catch (error) {
       console.error('上传头像时发生错误:', error);
       ElMessage.error('头像上传失败，请稍后重试');
