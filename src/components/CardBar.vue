@@ -5,7 +5,7 @@
     </h2>
     <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
       <CardBarItem
-        v-for="(item, index) in items"
+        v-for="(item, index) in items.slice(0, 4)"
         :key="index"
         :imageUrl="item.imageUrl"
         :title="item.title"
