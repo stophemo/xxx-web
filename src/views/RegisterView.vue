@@ -102,10 +102,11 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
   import IconDiamond from '@/components/icons/IconDiamond.vue';
-  import userService from '@/api/userService';
+  import userService, { type UserUpdateInputDTO } from '@/api/userService';
   import router from '@/router';
   import { ElMessage } from 'element-plus';
   import fileService, { type FileInfoGetOutputDTO } from '@/api/fileService';
+  import { useUserStore } from '@/stores/userStore';
 
   const email = ref('');
   const phone = ref('');
@@ -115,6 +116,9 @@
   const gender = ref(0);
   let avatar = ref('');
   const role = ref('user');
+
+  const filePath = ref('');
+  const file = ref<File | null>(null);
 
   const onRegister = () => {
     const userData = {
@@ -132,15 +136,46 @@
       .register(userData)
       .then(() => {
         ElMessage.success({
-          message: 'Registration successful!',
+          message: '注册成功！',
           duration: 5 * 1000,
         });
+      })
+      .then(async () => {
+        if (filePath.value!== '' && file.value!== null) {
+          try {
+            // 上传文件
+            await fileService.uploadFileByForm(false, filePath.value, file.value);
+            // 获取文件信息
+            const fileInfo = await fileService.getFileInfo({
+              page: 1,
+              perPage: 0,
+              password: '',
+              path: filePath.value,
+              refresh: false,
+            });
+            if (fileInfo?.raw_url) {
+              const userInfoInput: UserUpdateInputDTO = {
+                id: useUserStore().userInfo?.id?? '',
+                avatar: fileInfo.raw_url,
+              };
+              await userService.updateUserInfo(userInfoInput);
+              ElMessage.success('头像上传成功');
+            } else {
+              ElMessage.error('无法获取头像 URL。');
+            }
+          } catch (uploadError) {
+            ElMessage.error('文件上传过程中出现错误。');
+          }
+        } else {
+          ElMessage.error('未选择文件。');
+          return;
+        }
         return router.push('/login');
       })
       .catch((error) => {
-        console.error('Registration failed:', error);
+        console.error('注册失败：', error);
         ElMessage.error({
-          message: 'Registration failed. Please try again.',
+          message: '注册失败，请检查信息后重试。',
           duration: 5 * 1000,
         });
       });
@@ -154,31 +189,8 @@
   const onAvatarChange = (event: Event) => {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length > 0) {
-      const file = inputElement.files[0];
-      const filePath = `/tencent/xxx/server/images/${file.name}_${Date.now()}`;
-      fileService
-        .uploadFileByForm(false, filePath, file)
-        .then(async () => {
-          const fileInfo: FileInfoGetOutputDTO = await fileService.getFileInfo({
-            page: 1,
-            perPage: 0,
-            password: '',
-            path: filePath,
-            refresh: false,
-          })
-          if (fileInfo && fileInfo.raw_url) {
-            avatar.value = fileInfo.raw_url;
-            ElMessage.success('头像上传成功');
-            console.log("上传成功");
-          } else {
-            ElMessage.error('无法获取头像 URL');
-            console.log("上传失败");
-          }
-        })
-        .catch((error) => {
-          console.error('上传头像时发生错误：', error);
-          ElMessage.error('头像上传失败，请稍后重试');
-        });
+      file.value = inputElement.files[0];
+      filePath.value = `/tencent/xxx/server/images/${file.value.name}_${Date.now()}`;
     }
   };
 </script>

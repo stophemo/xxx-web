@@ -1,6 +1,6 @@
 // 获取assets图片
-export const getAssetsImg = (url: string) => {
-  return new URL(`../assets/img/${url}`, import.meta.url).href;
+export const getAssetsImg = (imgName: string) => {
+  return new URL(`../assets/img/${imgName}.webp`, import.meta.url).href;
 };
 
 export const checkImgExists = (url: string) => {

@@ -7,7 +7,7 @@
             <div
               class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4"
               :style="{
-                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url(${getAssetsImg('episode-1.png')})`,
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url(${getAssetsImg('episode-1')})`,
               }"
             >
               <h1
@@ -58,73 +58,73 @@
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              :style="{ backgroundImage: `url(${getAssetsImg('episode-2.png')})` }"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-2')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              :style="{ backgroundImage: `url(${getAssetsImg('episode-3.png')})` }"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-3')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              :style="{ backgroundImage: `url(${getAssetsImg('episode-4.png')})` }"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-4')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              :style="{ backgroundImage: `url(${getAssetsImg('episode-5.png')})` }"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-5')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              :style="{ backgroundImage: `url(${getAssetsImg('episode-6.png')})` }"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-6')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              :style="{ backgroundImage: `url(${getAssetsImg('episode-7.png')})` }"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-7')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              :style="{ backgroundImage: `url(${getAssetsImg('episode-8.png')})` }"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-8')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              :style="{ backgroundImage: `url(${getAssetsImg('episode-9.png')})` }"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-9')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              :style="{ backgroundImage: `url(${getAssetsImg('episode-10.png')})` }"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-10')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              :style="{ backgroundImage: `url(${getAssetsImg('episode-11.png')})` }"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-11')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              :style="{ backgroundImage: `url(${getAssetsImg('episode-12.png')})` }"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-12')})` }"
             ></div>
           </div>
           <div class="flex flex-col gap-3">
             <div
               class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-              :style="{ backgroundImage: `url(${getAssetsImg('episode-13.png')})` }"
+              :style="{ backgroundImage: `url(${getAssetsImg('episode-13')})` }"
             ></div>
           </div>
         </div>

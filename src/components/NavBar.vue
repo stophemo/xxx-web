@@ -30,13 +30,23 @@
         <GridIcon />
         <BellIcon />
       </div>
-      <div
-        class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 relative cursor-pointer"
-        :style="{ backgroundImage: `url(${avatar})` }"
+      <el-image
+        class="aspect-square rounded-full size-10 relative cursor-pointer"
+        :key="avatar"
+        :src="avatar"
+        fit="cover"
+        loading="lazy"
         @click="toggleDropdown"
       >
-        <AvatarDialog v-if="dropdownVisible" v-click-outside="closeDropdown" :updateAvatar="updateAvatar" />
-      </div>
+        <template #placeholder>
+          <el-image :src="getAssetsImg('avatar-defualt')" fit="cover" />
+        </template>
+      </el-image>
+      <AvatarDialog
+        v-if="dropdownVisible"
+        v-click-outside="closeDropdown"
+        :updateAvatar="updateAvatar"
+      />
     </div>
   </header>
 </template>
@@ -56,19 +66,19 @@
 
   const toggleDropdown = () => {
     dropdownVisible.value = !dropdownVisible.value;
-    console.log('切换成功');
+    console.log('toggle成功');
   };
 
   const closeDropdown = () => {
     dropdownVisible.value = false;
-    console.log('关闭成功');
+    console.log('close by outside成功');
   };
 
   const avatar = ref<string>('');
 
   const updateAvatar = (newAvatarUrl: string) => {
     avatar.value = newAvatarUrl;
-    console.log('修改成功');
+    console.log('修改头像成功');
   };
 
   onBeforeMount(async () => {
@@ -92,7 +102,7 @@
     if (currentUserInfo && currentUserInfo.avatar) {
       avatar.value = currentUserInfo.avatar;
     }
-    avatar.value = getWebImg(avatar.value, getAssetsImg('nav-1.png'));
+    avatar.value = getWebImg(avatar.value, getAssetsImg('nav-1'));
   });
 </script>
 

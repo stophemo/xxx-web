@@ -1,6 +1,8 @@
 <template>
   <NavbarItem>
-    <div class="relative flex size-full min-h-screen flex-col bg-neutral-50 group/design-root overflow-x-hidden">
+    <div
+      class="relative flex size-full min-h-screen flex-col bg-neutral-50 group/design-root overflow-x-hidden"
+    >
       <div class="layout-container flex h-full grow flex-col">
         <div class="px-40 flex flex-1 justify-center py-5">
           <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
@@ -8,7 +10,9 @@
               <div class="@[480px]:p-4">
                 <div
                   class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-start justify-end px-4 pb-10 @[480px]:px-10"
-                  :style="{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url(${getAssetsImg('home-1.png')})`}"
+                  :style="{
+                    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url(${getAssetsImg('home-1')})`,
+                  }"
                 >
                   <div class="flex flex-col gap-2 text-left">
                     <h1
@@ -19,8 +23,9 @@
                     <h2
                       class="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal"
                     >
-                      I am a software engineer, YouTuber, and creator. This is my digital garden, where I grow ideas and
-                      share what I learn. Explore the site to see videos, blog posts, resources, and more!
+                      I am a software engineer, YouTuber, and creator. This is my digital garden,
+                      where I grow ideas and share what I learn. Explore the site to see videos,
+                      blog posts, resources, and more!
                     </h2>
                   </div>
                   <label class="flex flex-col min-w-40 h-14 w-full max-w-[480px] @[480px]:h-16">
@@ -62,14 +67,16 @@
                 </div>
               </div>
             </div>
-            <h2 class="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+            <h2
+              class="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5"
+            >
               Featured Content
             </h2>
             <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
               <div class="flex flex-col gap-3 pb-3">
                 <div
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                  :style="{ backgroundImage: `url(${getAssetsImg('home-2.png')})` }"
+                  :style="{ backgroundImage: `url(${getAssetsImg('home-2')})` }"
                 ></div>
                 <div>
                   <p class="text-[#141414] text-base font-medium leading-normal">
@@ -79,7 +86,8 @@
                 </div>
               </div>
               <div class="flex flex-col gap-3 pb-3">
-                <div :style="{ backgroundImage: `url(${getAssetsImg('home-3.png')})`}"
+                <div
+                  :style="{ backgroundImage: `url(${getAssetsImg('home-3')})` }"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
                 ></div>
                 <div>
@@ -90,7 +98,8 @@
                 </div>
               </div>
               <div class="flex flex-col gap-3 pb-3">
-                <div :style="{ backgroundImage: `url(${getAssetsImg('home-4.png')})`}"
+                <div
+                  :style="{ backgroundImage: `url(${getAssetsImg('home-4')})` }"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
                 ></div>
                 <div>
@@ -101,7 +110,8 @@
                 </div>
               </div>
               <div class="flex flex-col gap-3 pb-3">
-                <div :style="{ backgroundImage: `url(${getAssetsImg('home-5.png')})`}"
+                <div
+                  :style="{ backgroundImage: `url(${getAssetsImg('home-5')})` }"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
                 ></div>
                 <div>
@@ -112,12 +122,15 @@
                 </div>
               </div>
             </div>
-            <h2 class="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+            <h2
+              class="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5"
+            >
               Resources
             </h2>
             <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
               <div class="flex flex-col gap-3 pb-3">
-                <div :style="{ backgroundImage: `url(${getAssetsImg('home-6.png')})`}"
+                <div
+                  :style="{ backgroundImage: `url(${getAssetsImg('home-6')})` }"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
                 ></div>
                 <div>
@@ -128,7 +141,8 @@
                 </div>
               </div>
               <div class="flex flex-col gap-3 pb-3">
-                <div :style="{ backgroundImage: `url(${getAssetsImg('home-7.png')})`}"
+                <div
+                  :style="{ backgroundImage: `url(${getAssetsImg('home-7')})` }"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
                 ></div>
                 <div>
@@ -139,7 +153,8 @@
                 </div>
               </div>
               <div class="flex flex-col gap-3 pb-3">
-                <div :style="{ backgroundImage: `url(${getAssetsImg('home-8.png')})`}"
+                <div
+                  :style="{ backgroundImage: `url(${getAssetsImg('home-8')})` }"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
                 ></div>
                 <div>
@@ -150,7 +165,8 @@
                 </div>
               </div>
               <div class="flex flex-col gap-3 pb-3">
-                <div :style="{ backgroundImage: `url(${getAssetsImg('home-9.png')})`}"
+                <div
+                  :style="{ backgroundImage: `url(${getAssetsImg('home-9')})` }"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
                 ></div>
                 <div>
@@ -161,12 +177,15 @@
                 </div>
               </div>
             </div>
-            <h2 class="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+            <h2
+              class="text-[#141414] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5"
+            >
               Recent Posts
             </h2>
             <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
               <div class="flex flex-col gap-3 pb-3">
-                <div :style="{ backgroundImage: `url(${getAssetsImg('home-10.png')})`}"
+                <div
+                  :style="{ backgroundImage: `url(${getAssetsImg('home-10')})` }"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
                 ></div>
                 <div>
@@ -177,7 +196,8 @@
                 </div>
               </div>
               <div class="flex flex-col gap-3 pb-3">
-                <div :style="{ backgroundImage: `url(${getAssetsImg('home-11.png')})`}"
+                <div
+                  :style="{ backgroundImage: `url(${getAssetsImg('home-11')})` }"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
                 ></div>
                 <div>
@@ -188,7 +208,8 @@
                 </div>
               </div>
               <div class="flex flex-col gap-3 pb-3">
-                <div :style="{ backgroundImage: `url(${getAssetsImg('home-12.png')})`}"
+                <div
+                  :style="{ backgroundImage: `url(${getAssetsImg('home-12')})` }"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
                 ></div>
                 <div>
@@ -199,7 +220,8 @@
                 </div>
               </div>
               <div class="flex flex-col gap-3 pb-3">
-                <div :style="{ backgroundImage: `url(${getAssetsImg('home-13.png')})`}"
+                <div
+                  :style="{ backgroundImage: `url(${getAssetsImg('home-13')})` }"
                   class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
                 ></div>
                 <div>
@@ -218,9 +240,8 @@
 </template>
 
 <script setup lang="ts">
-import NavbarItem from '@/components/NavBarItem.vue';
-import { getAssetsImg } from '@/util/utils';
-
+  import NavbarItem from '@/components/NavBarItem.vue';
+  import { getAssetsImg } from '@/util/utils';
 </script>
 
 <style scoped></style>
