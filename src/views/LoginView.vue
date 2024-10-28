@@ -78,7 +78,8 @@
 
   const onLogin = () => {
     try {
-      userService.login(username.value, password.value).then(() => {
+      userService.login(username.value, password.value).then((res) => {
+        localStorage.setItem("token", res.data)
         router.push('/');
       });
     } catch (error) {

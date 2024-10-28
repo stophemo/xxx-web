@@ -134,7 +134,8 @@
 
     userService
       .register(userData)
-      .then(() => {
+      .then((res) => {
+        localStorage.setItem('token', res.data);
         ElMessage.success({
           message: '注册成功！',
           duration: 5 * 1000,

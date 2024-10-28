@@ -40,6 +40,8 @@
       required: true,
     },
   });
+
+  let config = window.config;
   const handleImageSelection = async (event: Event) => {
     try {
       const file = (event.target as HTMLInputElement).files?.[0];
@@ -65,7 +67,7 @@
         success(result) {
           let newfile = new File([result], file.name, { type: file.type });
           // 生成文件路径
-          const filePath = `/tencent/xxx/server/images/${Date.now()}_${file.name}`;
+          const filePath = `${window.config.imageStoragePath}${Date.now()}_${file.name}`;
           // 上传文件
           fileService.uploadFileByForm(false, filePath, newfile).then(() => {
             // 获取文件信息

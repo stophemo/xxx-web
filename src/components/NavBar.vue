@@ -38,7 +38,7 @@
         loading="lazy"
         @click="toggleDropdown"
       >
-        <template #placeholder>
+        <template #error #placeholder>
           <el-image :src="getAssetsImg('avatar-defualt')" fit="cover" />
         </template>
       </el-image>

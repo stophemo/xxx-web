@@ -1,11 +1,15 @@
 import axios from 'axios';
 import { ElMessage, ElLoading } from 'element-plus';
 import router from '@/router';
+import { getBaseUrl } from '@/util/getConfig';
 
 // 创建axios实例
 const service = axios.create({
+  baseURL: getBaseUrl(),
   timeout: 15000,
-  withCredentials: true,
+  headers: {
+    "satoken": localStorage.getItem("token")
+  }
 });
 
 let loading: any;
@@ -51,6 +55,7 @@ service.interceptors.response.use(
     const code = res.data['code'] || 200;
     // 获取错误信息
     const msg = res.data['message'];
+    console.log(res)
     if (code === 200) {
       return Promise.resolve(res.data);
     } else if (code === 1009 || code === 1017 || code === 1018) {

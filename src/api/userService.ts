@@ -1,14 +1,14 @@
 import service from './config/request';
 
 const userService = {
-  async register(inputDTO: UserAddInputDTO): Promise<void> {
+  async register(inputDTO: UserAddInputDTO): Promise<string> {
     await service.post('/api/user/register', inputDTO);
   },
 
   async updateUserInfo(inputDTO: UserUpdateInputDTO): Promise<void> {
     await service.post('/api/user/updateUserInfo', inputDTO);
   },
-  async login(username: string, password: string): Promise<void> {
+  async login(username: string, password: string): Promise<string> {
     await service.post(
       '/api/user/login',
       { username, password },
