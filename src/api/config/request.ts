@@ -1,15 +1,15 @@
 import axios from 'axios';
 import { ElMessage, ElLoading } from 'element-plus';
 import router from '@/router';
-import { getBaseUrl } from '@/util/getConfig';
+import { getProperty } from '@/util/getConfig';
 
 // 创建axios实例
 const service = axios.create({
-  baseURL: getBaseUrl(),
+  baseURL: getProperty('baseUrl'),
   timeout: 15000,
   headers: {
-    "satoken": localStorage.getItem("token")
-  }
+    'Content-Type': 'application/json;charset=UTF-8',
+  },
 });
 
 let loading: any;
@@ -39,23 +39,26 @@ const hideLoading = () => {
 service.interceptors.request.use(
   (config) => {
     showLoading();
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers['token'] = token; // 设置 token 到请求头
+    }
     return config;
   },
   (error) => {
-    console.log(error);
+    console.log("request interceptor: \n", error);
     return Promise.reject(error);
   },
 );
 
 // 响应拦截器
 service.interceptors.response.use(
-  (res: any) => {
+  (res) => {
     hideLoading();
     // 未设置状态码则默认成功状态
     const code = res.data['code'] || 200;
     // 获取错误信息
     const msg = res.data['message'];
-    console.log(res)
     if (code === 200) {
       return Promise.resolve(res.data);
     } else if (code === 1009 || code === 1017 || code === 1018) {
@@ -68,7 +71,7 @@ service.interceptors.response.use(
     }
   },
   (error) => {
-    console.log('err' + error);
+    console.log("response interceptor: \n", error);
     hideLoading();
     let { message } = error;
     if (message == 'Network Error') {

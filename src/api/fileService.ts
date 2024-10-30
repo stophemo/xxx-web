@@ -1,15 +1,15 @@
 import service from './config/request';
 
-const fileService = {
-  async listFiles(inputDTO: FilesGetInputDTO): Promise<FilesGetOutputDTO> {
+export default class FileService {
+  static async listFiles(inputDTO: FilesGetInputDTO): Promise<FilesGetOutputDTO> {
     return service.post('/api/file/list', inputDTO).then((response) => response.data);
-  },
+  }
 
-  async getFileInfo(inputDTO: FileInfoGetInputDTO): Promise<FileInfoGetOutputDTO> {
+  static async getFileInfo(inputDTO: FileInfoGetInputDTO): Promise<FileInfoGetOutputDTO> {
     return service.post('/api/file/get', inputDTO).then((response) => response.data);
-  },
+  }
 
-  async uploadFileByForm(
+  static async uploadFileByForm(
     asTask: boolean | undefined,
     filePath: string,
     file: File,
@@ -25,9 +25,9 @@ const fileService = {
         },
       )
       .then((response) => response.data);
-  },
+  }
 
-  async uploadFileByStream(
+  static async uploadFileByStream(
     asTask: boolean | undefined,
     filePath: string,
     fileContents: Uint8Array,
@@ -39,10 +39,8 @@ const fileService = {
         fileContents,
       })
       .then((response) => response.data);
-  },
-};
-
-export default fileService;
+  }
+}
 
 export interface FilesGetInputDTO {
   page: number;
@@ -100,7 +98,7 @@ export interface FilesContent {
   type: number;
 }
 
-interface UploadResult {
+export interface UploadResult {
   task: {
     id: string;
     name: string;

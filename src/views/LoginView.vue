@@ -67,49 +67,37 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, onMounted } from 'vue';
+  import { ref } from 'vue';
   import IconDiamond from '@/components/icons/IconDiamond.vue';
-  import userService from '@/api/userService';
   import router from '@/router';
   import { ElMessage } from 'element-plus';
+  import userService from '@/api/userService';
 
   const username = ref('');
   const password = ref('');
 
   const onLogin = () => {
-    try {
-      userService.login(username.value, password.value).then((res) => {
-        localStorage.setItem("token", res.data)
-        router.push('/');
+    userService
+      .login(username.value, password.value)
+      .then((res) => {
+        if (res) {
+          localStorage.setItem('token', res);
+          router.push('/');
+        }
+      })
+      .catch((e) => {
+        console.error('登录失败：', e);
+        ElMessage.error({
+          message: '登录失败',
+          duration: 5 * 1000,
+        });
       });
-    } catch (error) {
-      console.error('登录失败：', error);
-      ElMessage.error({
-        message: '登录失败',
-        duration: 5 * 1000,
-      });
-    }
   };
 
   const onSignup = (event: Event) => {
     event.preventDefault();
     router.push('/register');
   };
-
-  onMounted(async () => {
-    try {
-      const userInfo = await userService.getCurrentUserInfo();
-      if (userInfo.isLogin) {
-        await router.push('/');
-      }
-    } catch (error) {
-      console.error('获取当前用户信息失败：', error);
-      ElMessage.error({
-        message: '获取当前用户信息失败',
-        duration: 5 * 1000,
-      });
-    }
-  });
 </script>
 
 <style scoped></style>

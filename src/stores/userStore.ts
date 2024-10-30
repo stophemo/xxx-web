@@ -1,12 +1,19 @@
 import { defineStore } from 'pinia';
 
 export const useUserStore = defineStore('user', {
-  state: (): { userInfo: UserInfo | null } => ({
+  state: (): {
+    userInfo: UserInfo | null;
+    token: string;
+  } => ({
     userInfo: null,
+    token: '',
   }),
   actions: {
     setUserInfo(info: UserInfo) {
       this.userInfo = info;
+    },
+    setToken(s: string) {
+      this.token = s;
     },
   },
 });

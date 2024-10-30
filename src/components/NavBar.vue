@@ -9,19 +9,29 @@
 
     <div class="flex flex-1 justify-end gap-8">
       <nav class="flex items-center gap-9">
-        <RouterLink class="text-[#141414] text-sm font-medium leading-normal" to="/"
+        <RouterLink
+          class="text-[#141414] text-sm font-medium leading-normal"
+          :to="{ name: 'home', params: { id: userName } }"
           >Home</RouterLink
         >
-        <RouterLink class="text-[#141414] text-sm font-medium leading-normal" to="/episode"
+        <RouterLink
+          class="text-[#141414] text-sm font-medium leading-normal"
+          :to="{ name: 'episode', params: { id: userName } }"
           >Episode</RouterLink
         >
-        <RouterLink class="text-[#141414] text-sm font-medium leading-normal" to="/memo"
+        <RouterLink
+          class="text-[#141414] text-sm font-medium leading-normal"
+          :to="{ name: 'memo', params: { id: userName } }"
           >Memo</RouterLink
         >
-        <RouterLink class="text-[#141414] text-sm font-medium leading-normal" to="/resources"
+        <RouterLink
+          class="text-[#141414] text-sm font-medium leading-normal"
+          :to="{ name: 'resources', params: { id: userName } }"
           >Resources</RouterLink
         >
-        <RouterLink class="text-[#141414] text-sm font-medium leading-normal" to="/about"
+        <RouterLink
+          class="text-[#141414] text-sm font-medium leading-normal"
+          :to="{ name: 'about', params: { id: userName } }"
           >About</RouterLink
         >
       </nav>
@@ -38,7 +48,10 @@
         loading="lazy"
         @click="toggleDropdown"
       >
-        <template #error #placeholder>
+        <template #placeholder>
+          <el-image :src="getAssetsImg('avatar-defualt')" fit="cover" />
+        </template>
+        <template #error>
           <el-image :src="getAssetsImg('avatar-defualt')" fit="cover" />
         </template>
       </el-image>
@@ -62,28 +75,26 @@
   import AvatarDialog from '@/components/AvatarDialog.vue';
   import { type UserInfo, useUserStore } from '@/stores/userStore';
 
+  const userName = ref<string>('0');
+
   const dropdownVisible = ref<boolean>(false);
 
   const toggleDropdown = () => {
     dropdownVisible.value = !dropdownVisible.value;
-    console.log('toggle成功');
   };
 
   const closeDropdown = () => {
     dropdownVisible.value = false;
-    console.log('close by outside成功');
   };
 
   const avatar = ref<string>('');
 
   const updateAvatar = (newAvatarUrl: string) => {
     avatar.value = newAvatarUrl;
-    console.log('修改头像成功');
   };
 
-  onBeforeMount(async () => {
-    let currentUserInfo = await userService.getCurrentUserInfo();
-    if (currentUserInfo) {
+  onBeforeMount(() => {
+    userService.getCurrentUserInfo().then((currentUserInfo) => {
       const userInfo: UserInfo = {
         id: currentUserInfo.id,
         email: currentUserInfo.email,
@@ -96,13 +107,12 @@
         ordinal: currentUserInfo.ordinal,
         role: currentUserInfo.role,
       };
+      userName.value = currentUserInfo.name;
       useUserStore().setUserInfo(userInfo);
-    }
+      avatar.value = getWebImg(currentUserInfo.avatar, getAssetsImg('nav-1'));
 
-    if (currentUserInfo && currentUserInfo.avatar) {
-      avatar.value = currentUserInfo.avatar;
-    }
-    avatar.value = getWebImg(avatar.value, getAssetsImg('nav-1'));
+      console.log(userName);
+    });
   });
 </script>
 

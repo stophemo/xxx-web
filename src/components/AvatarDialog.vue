@@ -5,7 +5,7 @@
     <li class="px-4 py-2 text-sm text-gray-700 cursor-pointer" @click="openImagePicker"
       >更换头像</li
     >
-    <li class="px-4 py-2 text-sm text-gray-700 cursor-pointer" @click="logout">注销</li>
+    <li class="px-4 py-2 text-sm text-gray-700 cursor-pointer" @click="onLogout">注销</li>
   </ul>
 </template>
 
@@ -15,15 +15,15 @@
   import fileService from '@/api/fileService';
   import { useUserStore } from '@/stores/userStore';
   import { ElMessage } from 'element-plus';
-  import Compressor from 'compressorjs';
+  import { getProperty } from '@/util/getConfig';
+  import { convertImageToWebP } from '@/util/utils';
 
-  const logout = async () => {
-    try {
-      await userService.logout();
-      await router.push('/login');
-    } catch (error) {
-      console.error('Logout failed:', error);
-    }
+  const userStore = useUserStore();
+
+  const onLogout = async () => {
+    userService.logout().then(() => {
+      router.push('/login');
+    });
   };
 
   const openImagePicker = () => {
@@ -41,7 +41,6 @@
     },
   });
 
-  let config = window.config;
   const handleImageSelection = async (event: Event) => {
     try {
       const file = (event.target as HTMLInputElement).files?.[0];
@@ -55,21 +54,18 @@
         ElMessage.error('图片大小超过限制（5MB）');
         return;
       }
-      new Compressor(file, {
-        quality: 0.5,
-        strict: true,
-        maxWidth: 500,
-        maxHeight: 500,
-        minWidth: 100,
-        minHeight: 100,
-        mimeType: 'image/webp',
-        convertSize: 1024,
-        success(result) {
-          let newfile = new File([result], file.name, { type: file.type });
+      convertImageToWebP(file, 0.5)
+        .then((result) => {
+          console.log('压缩成功：', result);
+          const newFile = new File([result], file.name, { type: file.type });
           // 生成文件路径
-          const filePath = `${window.config.imageStoragePath}${Date.now()}_${file.name}`;
+          const imageStoragePath = getProperty('imageStoragePath');
+          const extension = file.name.split('.').pop();
+          const fileName = 'avatar_' + userStore.userInfo?.name ?? '';
+          // 生成文件路径
+          const filePath = `${imageStoragePath}${fileName}.${extension}`;
           // 上传文件
-          fileService.uploadFileByForm(false, filePath, newfile).then(() => {
+          fileService.uploadFileByForm(false, filePath, newFile).then(() => {
             // 获取文件信息
             fileService
               .getFileInfo({
@@ -83,9 +79,10 @@
                 // 检查文件信息并更新用户头像
                 if (fileInfo?.raw_url) {
                   const userInfoInput: UserUpdateInputDTO = {
-                    id: useUserStore().userInfo?.id ?? '',
+                    id: userStore.userInfo?.id ?? '',
                     avatar: fileInfo.raw_url,
                   };
+                  console.log('fileInfo: ', fileInfo);
                   userService.updateUserInfo(userInfoInput);
                   props.updateAvatar(fileInfo.raw_url);
                   ElMessage.success('头像上传成功');
@@ -94,12 +91,11 @@
                 }
               });
           });
-        },
-        error(err) {
+        })
+        .catch((err) => {
           console.log(err.message);
           ElMessage.error('文件上传过程中出现错误');
-        },
-      });
+        });
     } catch (error) {
       console.error('上传头像时发生错误:', error);
       ElMessage.error('头像上传失败，请稍后重试');

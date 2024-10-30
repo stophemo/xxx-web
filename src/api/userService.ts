@@ -1,41 +1,42 @@
 import service from './config/request';
 
-const userService = {
-  async register(inputDTO: UserAddInputDTO): Promise<string> {
-    await service.post('/api/user/register', inputDTO);
-  },
+export default class UserService {
+  static async register(inputDTO: UserAddInputDTO): Promise<string> {
+    return service.post('/api/user/register', inputDTO).then((response) => response.data);
+  }
 
-  async updateUserInfo(inputDTO: UserUpdateInputDTO): Promise<void> {
+  static async updateUserInfo(inputDTO: UserUpdateInputDTO): Promise<void> {
     await service.post('/api/user/updateUserInfo', inputDTO);
-  },
-  async login(username: string, password: string): Promise<string> {
-    await service.post(
-      '/api/user/login',
-      { username, password },
-      {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      },
-    );
-  },
+  }
 
-  async logout(): Promise<void> {
+  static async login(username: string, password: string): Promise<string> {
+    return service
+      .post(
+        '/api/user/login',
+        { username, password },
+        {
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        },
+      )
+      .then((response) => response.data);
+  }
+
+  static async logout(): Promise<void> {
     await service.post('/api/user/logout');
-  },
+  }
 
-  async delete(id: string): Promise<void> {
+  static async delete(id: string): Promise<void> {
     await service.post('/api/user/delete', null, {
       params: {
         id,
       },
     });
-  },
+  }
 
-  async getCurrentUserInfo(): Promise<UserInfoGetOutputDTO> {
-    return (await service.post('/api/user/getCurrentUserInfo')).data;
-  },
-};
-
-export default userService;
+  static async getCurrentUserInfo(): Promise<UserInfoGetOutputDTO> {
+    return service.post('/api/user/getCurrentUserInfo').then((response) => response.data);
+  }
+}
 
 export interface UserAddInputDTO {
   email: string;
