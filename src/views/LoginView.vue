@@ -1,14 +1,8 @@
 <template>
   <!-- Header -->
-  <header
-    class="flex items-center whitespace-nowrap bg-neutral-50 border-b border-solid border-b-[#ededed] px-10 py-3 gap-4"
-  >
+  <header class="flex items-center whitespace-nowrap bg-neutral-50 border-b border-solid border-b-[#ededed] px-10 py-3 gap-4">
     <IconDiamond />
-    <h2
-      class="text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em] h-10 flex items-center justify-center"
-    >
-      Home
-    </h2>
+    <h2 class="text-[#141414] text-lg font-bold leading-tight tracking-[-0.015em] h-10 flex items-center justify-center">Home</h2>
   </header>
 
   <!-- Main Content -->
@@ -48,13 +42,7 @@
         </div>
 
         <!-- Login Button -->
-        <button
-          type="submit"
-          class="w-full py-3 bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none"
-          @click="onLogin"
-        >
-          Login
-        </button>
+        <button type="submit" class="w-full py-3 bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none" @click="onLogin">Login</button>
       </div>
 
       <!-- Sign up link -->
@@ -67,37 +55,37 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
-  import IconDiamond from '@/components/icons/IconDiamond.vue';
-  import router from '@/router';
-  import { ElMessage } from 'element-plus';
-  import userService from '@/api/userService';
+import { ref } from 'vue'
+import IconDiamond from '@/components/icons/IconDiamond.vue'
+import router from '@/router'
+import { ElMessage } from 'element-plus'
+import userService from '@/api/userService'
 
-  const username = ref('');
-  const password = ref('');
+const username = ref('')
+const password = ref('')
 
-  const onLogin = () => {
-    userService
-      .login(username.value, password.value)
-      .then((res) => {
-        if (res) {
-          localStorage.setItem('token', res);
-          router.push('/');
-        }
+const onLogin = () => {
+  userService
+    .login(username.value, password.value)
+    .then(res => {
+      if (res) {
+        localStorage.setItem('token', res)
+        router.push(`/home/${username.value}`)
+      }
+    })
+    .catch(e => {
+      console.error('登录失败：', e)
+      ElMessage.error({
+        message: '登录失败',
+        duration: 5 * 1000
       })
-      .catch((e) => {
-        console.error('登录失败：', e);
-        ElMessage.error({
-          message: '登录失败',
-          duration: 5 * 1000,
-        });
-      });
-  };
+    })
+}
 
-  const onSignup = (event: Event) => {
-    event.preventDefault();
-    router.push('/register');
-  };
+const onSignup = (event: Event) => {
+  event.preventDefault()
+  router.push('/register')
+}
 </script>
 
 <style scoped></style>

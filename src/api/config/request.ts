@@ -63,7 +63,9 @@ service.interceptors.response.use(
       return Promise.resolve(res.data);
     } else if (code === 1009 || code === 1017 || code === 1018) {
       ElMessage.error(msg);
-      router.push('/login');
+      router.push('/login').catch((err) => {
+        console.error('路由跳转失败:', err);
+      });
       return Promise.resolve(res.data);
     } else {
       ElMessage.error(msg);
@@ -79,7 +81,7 @@ service.interceptors.response.use(
     } else if (message.includes('timeout')) {
       message = '系统接口请求超时';
     } else if (message.includes('Request failed with status code')) {
-      message = '系统接口' + message.substr(message.length - 3) + '异常';
+      message = '系统接口' + message.slice( - 3) + '异常';
     }
     ElMessage.error({
       message: message,

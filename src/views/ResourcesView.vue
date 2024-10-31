@@ -1,12 +1,7 @@
 <template>
-  <NavbarItem class="ResourcesView">
-    This is a ResourcesView page
-  </NavbarItem>
+  <h1>This is a ResourcesView page</h1>
 </template>
 
-<script setup lang="ts">
-import NavbarItem from '@/components/NavBarItem.vue';
-</script>
+<script setup lang="ts"></script>
 
-<style scoped>
-</style>
+<style scoped></style>

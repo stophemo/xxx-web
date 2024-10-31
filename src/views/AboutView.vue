@@ -1,11 +1,7 @@
 <template>
-  <NavbarItem class="about">
-    <h1>This is an about page</h1>
-  </NavbarItem>
+  <h1>this is a about view</h1>
 </template>
 
-<style>
-</style>
-<script setup lang="ts">
-import NavbarItem from '@/components/NavBarItem.vue';
-</script>
+<script setup lang="ts"></script>
+
+<style scoped></style>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router';
-import { onMounted } from 'vue';
+import { RouterView } from 'vue-router'
+import { onMounted } from 'vue'
 
 // element主题色
-const setVarStyle = (key:string,value:any,dom = document.documentElement) => {
+const setVarStyle = (key: string, value: any, dom = document.documentElement) => {
   dom.style.setProperty(key, value)
 }
 onMounted(() => {
@@ -14,8 +14,7 @@ onMounted(() => {
 </script>
 
 <template>
-
-  <RouterView />
+  <router-view />
 </template>
 
 <style scoped></style>
