@@ -86,6 +86,7 @@ const onSignup = (event: Event) => {
   event.preventDefault()
   router.push('/register')
 }
+
 </script>
 
 <style scoped></style>

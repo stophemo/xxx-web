@@ -16,7 +16,7 @@
   import { useUserStore } from '@/stores/userStore';
   import { ElMessage } from 'element-plus';
   import { getProperty } from '@/util/getConfig';
-  import { convertImageToWebP } from '@/util/utils';
+  import { compressAndConvertToWebP } from '@/util/utils'
 
   const userStore = useUserStore();
 
@@ -49,21 +49,17 @@
         ElMessage.error('未选择文件');
         return;
       }
-      // 校验图片大小，例如限制为 5MB
-      if (file.size > 5 * 1024 * 1024) {
-        ElMessage.error('图片大小超过限制（5MB）');
-        return;
-      }
-      convertImageToWebP(file, 0.5)
+      compressAndConvertToWebP(file, 0.2)
         .then((result) => {
           console.log('压缩成功：', result);
-          const newFile = new File([result], file.name, { type: file.type });
+          const fileName = 'avatar_' + (userStore.userInfo?.name || '');
+          const newFile = new File([result], `${fileName}.webp`, { type: 'image/webp' });
           // 生成文件路径
           const imageStoragePath = getProperty('imageStoragePath');
-          const extension = file.name.split('.').pop();
-          const fileName = 'avatar_' + userStore.userInfo?.name ?? '';
+          const fileExtension  = newFile.name.split('.').pop()?.toLowerCase()
+          console.log('newFile:', newFile)
           // 生成文件路径
-          const filePath = `${imageStoragePath}${fileName}.${extension}`;
+          const filePath = `${imageStoragePath}${fileName}.${fileExtension}`;
           // 上传文件
           fileService.uploadFileByForm(false, filePath, newFile).then(() => {
             // 获取文件信息
