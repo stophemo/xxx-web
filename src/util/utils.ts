@@ -10,6 +10,7 @@ export const checkImgExists = (url: string) => {
       resolve(res);
     };
     ImgObj.onerror = function (err) {
+      console.log(`图片无法加载：${url}`)
       reject(err);
     };
   });
