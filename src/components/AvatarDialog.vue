@@ -51,13 +51,11 @@
       }
       compressAndConvertToWebP(file, 0.2)
         .then((result) => {
-          console.log('压缩成功：', result);
           const fileName = 'avatar_' + (userStore.userInfo?.name || '');
           const newFile = new File([result], `${fileName}.webp`, { type: 'image/webp' });
           // 生成文件路径
           const imageStoragePath = getProperty('imageStoragePath');
           const fileExtension  = newFile.name.split('.').pop()?.toLowerCase()
-          console.log('newFile:', newFile)
           // 生成文件路径
           const filePath = `${imageStoragePath}${fileName}.${fileExtension}`;
           // 上传文件

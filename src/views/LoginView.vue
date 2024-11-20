@@ -60,7 +60,10 @@ import IconDiamond from '@/components/icons/IconDiamond.vue'
 import router from '@/router'
 import { ElMessage } from 'element-plus'
 import userService from '@/api/userService'
+import { useUserStore } from '@/stores/userStore'
 
+
+const userStore = useUserStore();
 const username = ref('')
 const password = ref('')
 
@@ -69,7 +72,7 @@ const onLogin = () => {
     .login(username.value, password.value)
     .then(res => {
       if (res) {
-        localStorage.setItem('token', res)
+        userStore.setToken(res)
         router.push(`/home/${username.value}`)
       }
     })

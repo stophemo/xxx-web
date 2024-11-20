@@ -16,6 +16,10 @@ export const useUserStore = defineStore('user', {
       this.token = s;
     },
   },
+  persist: {
+    key: 'user-store',
+    storage: sessionStorage,
+  },
 });
 
 export interface UserInfo {

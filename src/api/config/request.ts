@@ -2,6 +2,7 @@ import axios from 'axios';
 import { ElMessage, ElLoading } from 'element-plus';
 import router from '@/router';
 import { getProperty } from '@/util/getConfig';
+import { useUserStore } from '@/stores/userStore'
 
 // 创建axios实例
 const service = axios.create({
@@ -11,6 +12,7 @@ const service = axios.create({
     'Content-Type': 'application/json;charset=UTF-8',
   },
 });
+const userStore = useUserStore();
 
 let loading: any;
 // 正在请求的数量
@@ -39,7 +41,7 @@ const hideLoading = () => {
 service.interceptors.request.use(
   (config) => {
     showLoading();
-    const token = localStorage.getItem('token');
+    const token = userStore.token;
     if (token) {
       config.headers['token'] = token; // 设置 token 到请求头
     }

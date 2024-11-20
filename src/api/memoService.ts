@@ -1,52 +1,89 @@
-import service from './config/request';
+import service from './config/request'
+import type { PageParam, PageResult } from '@/api/config/commonTypes'
 
 export default class MemoService {
-  static async get(username: string): Promise<MemoGetOutputDTO[]> {
-    return service.get(`/api/memo/get?username=${username}`).then((response) => response.data);
+  static async getUserMemo(username: string): Promise<MemoGetOutputDTO[]> {
+    return service
+      .post(
+        `/api/memo/getUserMemo`,
+        { username },
+        {
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }
+      )
+      .then(response => response.data)
   }
 
-  static async add(inputDTO: MemoAddInputDTO): Promise<string> {
-    return service.post('/api/memo/add', inputDTO).then((response) => response.data);
+  static async addMemo(inputDTO: MemoAddInputDTO): Promise<string> {
+    return service.post('/api/memo/addMemo', inputDTO).then(response => response.data)
   }
 
-  static async update(inputDTO: MemoUpdateInputDTO): Promise<void> {
-    return service.post('/api/memo/update', inputDTO);
+  static async updateMemo(inputDTO: MemoUpdateInputDTO): Promise<void> {
+    return service.post('/api/memo/updateMemo', inputDTO)
   }
 
-  static async delete(id: string): Promise<void> {
-    return service.post('/api/memo/del', null, {
+  static async deleteMemo(id: string): Promise<void> {
+    return service.post('/api/memo/deleteMemo', null, {
       params: {
-        id,
-      },
-    });
+        id
+      }
+    })
   }
 
-  static async query(param: any): Promise<any> {
-    return await service.post('/api/memo/query', param).then((response) => response.data);
+  static async queryMemo(param: PageParam<MemoQueryParam>): Promise<PageResult<MemoQueryResult>> {
+    return await service.post('/api/memo/queryMemo', param).then(response => response.data)
   }
 }
 
 export interface MemoGetOutputDTO {
-  tags: string;
-  contentList: MemoGetOutputDTOContent[];
+  tag: string
+  contentList: MemoGetOutputDTOContent[]
 }
 
 export interface MemoGetOutputDTOContent {
-  title: string;
-  content: string;
+  title: string
+  content: string
 }
 
 export interface MemoAddInputDTO {
-  title: string;
-  content: string;
-  tags: string;
-  priority: number;
+  title: string
+  content: string
+  tag: string
+  priority: number
 }
 
 export interface MemoUpdateInputDTO {
+  id: string
+  title: string
+  content: string
+  tag: string
+  priority: number
+}
+
+// 查询备忘录参数类型
+export interface MemoQueryParam  {
+  id?: string;
+  username?: string;
+  userId?: string;
+  title?: string;
+  content?: string;
+  tag?: string;
+  priority?: number;
+  createStartDate?: string;
+  createEndDate?: string;
+  updateStartDate?: string;
+  updateEndDate?: string;
+}
+
+// 查询备忘录结果类型
+export interface MemoQueryResult  {
   id: string;
+  username: string;
+  userId: string;
   title: string;
   content: string;
-  tags: string;
+  tag: string;
   priority: number;
+  createTime: string;
+  updateTime: string;
 }
