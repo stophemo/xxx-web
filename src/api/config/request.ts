@@ -43,7 +43,7 @@ service.interceptors.request.use(
     showLoading();
     const token = userStore.token;
     if (token) {
-      config.headers['token'] = token; // 设置 token 到请求头
+      config.headers['satoken'] = token; // 设置 token 到请求头
     }
     return config;
   },
