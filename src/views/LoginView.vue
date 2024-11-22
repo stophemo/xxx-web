@@ -80,7 +80,6 @@ const onLogin = () => {
     .login(username.value, password.value)
     .then(res => {
       if (res) {
-        userStore.setToken(res)
         router.push(`/home/${username.value}`)
       }
     })

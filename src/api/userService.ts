@@ -23,7 +23,11 @@ export default class UserService {
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         }
       )
-      .then(response => response.data)
+      .then((res) => {
+        const token = res.data
+        useUserStore().setToken(token)
+        return token
+      })
   }
 
   static async logout(): Promise<void> {
