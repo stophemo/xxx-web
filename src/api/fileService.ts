@@ -5,7 +5,7 @@ export default class FileService {
     return service.post('/api/file/list', inputDTO).then((response) => response.data);
   }
 
-  static async getFileInfo(inputDTO: FileInfoGetInputDTO): Promise<FileInfoGetOutputDTO> {
+  static async getFileInfo(inputDTO: FilesGetInputDTO): Promise<FileInfoGetOutputDTO> {
     return service.post('/api/file/get', inputDTO).then((response) => response.data);
   }
 
@@ -40,6 +40,22 @@ export default class FileService {
       })
       .then((response) => response.data);
   }
+
+  static async uploadImage(
+    fileDir: string,
+    file: File): Promise<string> {
+    return service
+      .post(
+        '/api/file/uploadImage',
+        { fileDir, file },
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        },
+      )
+      .then((response) => response.data);
+  };
 }
 
 export interface FilesGetInputDTO {
@@ -57,14 +73,6 @@ export interface FilesGetOutputDTO {
   readme: string;
   total: number;
   write: boolean;
-}
-
-export interface FileInfoGetInputDTO {
-  page: number;
-  perPage: number;
-  password: string;
-  path: string;
-  refresh: boolean;
 }
 
 export interface FileInfoGetOutputDTO {

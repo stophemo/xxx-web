@@ -55,17 +55,25 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 import IconDiamond from '@/components/icons/IconDiamond.vue'
 import router from '@/router'
 import { ElMessage } from 'element-plus'
 import userService from '@/api/userService'
 import { useUserStore } from '@/stores/userStore'
 
-
 const userStore = useUserStore();
 const username = ref('')
 const password = ref('')
+
+onBeforeMount(() => {
+  userService.isLogin()
+    .then(isLogin => {
+      if (isLogin) {
+        router.push(`/home/${userStore.userInfo?.name}`)
+      }
+    })
+})
 
 const onLogin = () => {
   userService

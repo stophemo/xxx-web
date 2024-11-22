@@ -7,11 +7,17 @@
 
     <div class="flex flex-1 justify-end gap-8">
       <nav class="flex items-center gap-9">
-        <RouterLink class="text-[#141414] text-sm font-medium leading-normal" :to="{ name: 'home', params: { id: userName } }">Home</RouterLink>
-        <RouterLink class="text-[#141414] text-sm font-medium leading-normal" :to="{ name: 'episode', params: { id: userName } }">Episode</RouterLink>
-        <RouterLink class="text-[#141414] text-sm font-medium leading-normal" :to="{ name: 'memo', params: { id: userName } }">Memo</RouterLink>
-        <RouterLink class="text-[#141414] text-sm font-medium leading-normal" :to="{ name: 'resources', params: { id: userName } }">Resources</RouterLink>
-        <RouterLink class="text-[#141414] text-sm font-medium leading-normal" :to="{ name: 'about', params: { id: userName } }">About</RouterLink>
+        <RouterLink class="text-[#141414] text-sm font-medium leading-normal" :to="{ name: 'home', params: { id: userStore.userInfo?.name } }">Home</RouterLink>
+        <RouterLink class="text-[#141414] text-sm font-medium leading-normal" :to="{ name: 'episode', params: { id: userStore.userInfo?.name } }"
+          >Episode</RouterLink
+        >
+        <RouterLink class="text-[#141414] text-sm font-medium leading-normal" :to="{ name: 'memo', params: { id: userStore.userInfo?.name } }">Memo</RouterLink>
+        <RouterLink class="text-[#141414] text-sm font-medium leading-normal" :to="{ name: 'resources', params: { id: userStore.userInfo?.name } }"
+          >Resources</RouterLink
+        >
+        <RouterLink class="text-[#141414] text-sm font-medium leading-normal" :to="{ name: 'about', params: { id: userStore.userInfo?.name } }"
+          >About</RouterLink
+        >
       </nav>
       <div class="flex gap-2">
         <SearchIcon />
@@ -33,7 +39,7 @@
           <el-image :src="getAssetsImg('avatar-defualt')" fit="cover" />
         </template>
       </el-image>
-      <AvatarDialog v-if="dropdownVisible" v-click-outside="closeDropdown" :updateAvatar="updateAvatar" />
+      <AvatarDialog v-if="dropdownVisible" v-click-outside="closeDropdown" />
     </div>
   </div>
 </template>
@@ -44,15 +50,13 @@ import SearchIcon from '@/components/icons/IconSearch.vue'
 import WaveflagIcon from '@/components/icons/IconWaveflag.vue'
 import GridIcon from '@/components/icons/IconGrid.vue'
 import userService from '@/api/userService'
-import { onBeforeMount, ref } from 'vue'
+import { computed, onBeforeMount, ref } from 'vue'
 import { getAssetsImg, getWebImg } from '@/util/utils'
 import AvatarDialog from '@/components/AvatarDialog.vue'
-import { type UserInfo, useUserStore } from '@/stores/userStore'
+import { useUserStore } from '@/stores/userStore'
 
-const userName = ref<string>('0')
-
+let userStore = useUserStore()
 const dropdownVisible = ref<boolean>(false)
-
 const toggleDropdown = () => {
   dropdownVisible.value = !dropdownVisible.value
 }
@@ -61,32 +65,13 @@ const closeDropdown = () => {
   dropdownVisible.value = false
 }
 
-const avatar = ref<string>('')
-
-const updateAvatar = (newAvatarUrl: string) => {
-  avatar.value = newAvatarUrl
-}
+let avatar = computed(() => {
+  console.log(userStore.userInfo?.avatar)
+  return getWebImg(userStore.userInfo?.avatar, getAssetsImg('nav-1'))
+})
 
 onBeforeMount(() => {
-  userService.getCurrentUserInfo().then(currentUserInfo => {
-    if (currentUserInfo) {
-      const userInfo: UserInfo = {
-        id: currentUserInfo.id,
-        email: currentUserInfo.email,
-        phone: currentUserInfo.phone,
-        name: currentUserInfo.name,
-        nickname: currentUserInfo.nickname,
-        gender: currentUserInfo.gender,
-        avatar: currentUserInfo.avatar,
-        status: currentUserInfo.status,
-        ordinal: currentUserInfo.ordinal,
-        role: currentUserInfo.role
-      }
-      userName.value = currentUserInfo.name
-      useUserStore().setUserInfo(userInfo)
-      avatar.value = getWebImg(currentUserInfo.avatar, getAssetsImg('nav-1'))
-    }
-  })
+  userService.getCurrentUserInfo()
 })
 </script>
 

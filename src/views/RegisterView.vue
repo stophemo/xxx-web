@@ -102,74 +102,69 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
   import IconDiamond from '@/components/icons/IconDiamond.vue';
-  import userService, { type UserUpdateInputDTO } from '@/api/userService';
+  import userService, { type UserUpdateInputDTO } from '@/api/userService'
   import router from '@/router';
   import { ElMessage } from 'element-plus';
-  import fileService, { type FileInfoGetOutputDTO } from '@/api/fileService';
-  import { useUserStore } from '@/stores/userStore';
+  import { checkImgExists, compressAndConvertToWebP } from '@/util/utils'
+  import { getProperty } from '@/util/getConfig'
+  import fileService from '@/api/fileService'
+  import { useUserStore } from '@/stores/userStore'
 
   const email = ref('');
   const phone = ref('');
   const name = ref('');
-  const nickname = ref('');
   const password = ref('');
-  const gender = ref(0);
-  let avatar = ref('');
-  const role = ref('user');
+  const avatar = ref('');
+  const userStore = useUserStore()
 
-  const filePath = ref('');
-  const file = ref<File | null>(null);
+  const file = ref<File | null | undefined>(null);
 
   const onRegister = () => {
     const userData = {
       email: email.value,
       phone: phone.value,
       name: name.value,
-      nickname: nickname.value,
       password: password.value,
-      gender: gender.value,
-      avatar: avatar.value,
-      role: role.value,
+      avatar: avatar.value
     };
 
     userService
       .register(userData)
-      .then((res) => {
-        localStorage.setItem('token', res);
+      .then(() => {
         ElMessage.success({
           message: '注册成功！',
           duration: 5 * 1000,
         });
       })
       .then(async () => {
-        if (filePath.value!== '' && file.value!== null) {
-          try {
-            // 上传文件
-            await fileService.uploadFileByForm(false, filePath.value, file.value);
-            // 获取文件信息
-            const fileInfo = await fileService.getFileInfo({
-              page: 1,
-              perPage: 0,
-              password: '',
-              path: filePath.value,
-              refresh: false,
-            });
-            if (fileInfo?.raw_url) {
-              const userInfoInput: UserUpdateInputDTO = {
-                id: useUserStore().userInfo?.id?? '',
-                avatar: fileInfo.raw_url,
-              };
-              await userService.updateUserInfo(userInfoInput);
-              ElMessage.success('头像上传成功');
-            } else {
-              ElMessage.error('无法获取头像 URL。');
-            }
-          } catch (uploadError) {
-            ElMessage.error('文件上传过程中出现错误。');
-          }
-        } else {
-          ElMessage.error('未选择文件。');
-          return;
+        // 检查文件是否存在，未选择文件则提示并返回
+        if (file.value) {
+          compressAndConvertToWebP(file.value, 0.2)
+            .then(result => {
+              const fileName = 'avatar_' + (name.value || '') + '_' + Date.now()
+              const newFile = new File([result], `${fileName}.webp`, { type: 'image/webp' })
+              // 生成文件路径
+              const fileDir = getProperty('imageStoragePath')
+              // 上传文件
+              fileService.uploadImage(fileDir, newFile).then(imgUrl => {
+                checkImgExists(imgUrl)
+                  .then(() => {
+                    const userInfoInput: UserUpdateInputDTO = {
+                      id: userStore.userInfo?.id ?? '',
+                      avatar: imgUrl
+                    }
+                    userService.updateUserInfo(userInfoInput)
+                    ElMessage.success('头像上传成功')
+                  })
+                  .catch(() => {
+                    ElMessage.error('无法获取头像 URL')
+                  })
+              })
+            })
+            .catch(err => {
+              console.log(err.message)
+              ElMessage.error('文件上传过程中出现错误')
+            })
         }
         return router.push('/login');
       })
@@ -188,11 +183,7 @@
   };
 
   const onAvatarChange = (event: Event) => {
-    const inputElement = event.target as HTMLInputElement;
-    if (inputElement.files && inputElement.files.length > 0) {
-      file.value = inputElement.files[0];
-      filePath.value = `/tencent/xxx/server/images/${file.value.name}_${Date.now()}`;
-    }
+    file.value = (event.target as HTMLInputElement).files?.[0]
   };
 </script>
 

@@ -2,22 +2,26 @@ export const getAssetsImg = (imgName: string) => {
   return new URL(`../assets/img/${imgName}.webp`, import.meta.url).href;
 };
 
-export const checkImgExists = (url: string) => {
+export const checkImgExists = (url: string | undefined) => {
   return new Promise(function (resolve, reject) {
     const ImgObj = new Image();
-    ImgObj.src = url;
-    ImgObj.onload = function (res) {
-      resolve(res);
-    };
-    ImgObj.onerror = function (err) {
-      console.log(`图片无法加载：${url}`)
-      reject(err);
-    };
+    if (url === undefined) {
+      reject("url 为空")
+    } else {
+      ImgObj.src = url;
+      ImgObj.onload = function (res) {
+        resolve(res);
+      };
+      ImgObj.onerror = function (err) {
+        console.log(`图片无法加载：${url}`)
+        reject(err);
+      };
+    }
   });
 };
 
 // 获取web图片
-export const getWebImg = (url: string, defualtUrl: string) => {
+export const getWebImg = (url: string | undefined, defualtUrl: string) => {
   checkImgExists(url)
     .then(() => {})
     .catch(() => {
@@ -64,3 +68,4 @@ export function compressAndConvertToWebP(file: File, quality: number = 0.8): Pro
     });
   });
 }
+
