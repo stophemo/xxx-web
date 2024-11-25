@@ -58,7 +58,6 @@
 import { onBeforeMount, ref } from 'vue'
 import IconDiamond from '@/components/icons/IconDiamond.vue'
 import router from '@/router'
-import { ElMessage } from 'element-plus'
 import userService from '@/api/userService'
 import { useUserStore } from '@/stores/userStore'
 
@@ -82,13 +81,6 @@ const onLogin = () => {
       if (res) {
         router.push(`/home/${username.value}`)
       }
-    })
-    .catch(e => {
-      console.error('登录失败：', e)
-      ElMessage.error({
-        message: '登录失败',
-        duration: 5 * 1000
-      })
     })
 }
 
