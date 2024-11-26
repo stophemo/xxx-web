@@ -61,29 +61,29 @@ export interface MemoUpdateInputDTO {
 }
 
 // 查询备忘录参数类型
-export interface MemoQueryParam  {
-  id?: string;
-  username?: string;
-  userId?: string;
-  title?: string;
-  content?: string;
-  tag?: string;
-  priority?: number;
-  createStartDate?: string;
-  createEndDate?: string;
-  updateStartDate?: string;
-  updateEndDate?: string;
+export interface MemoQueryParam {
+  id?: string
+  username?: string
+  userId?: string
+  title?: string
+  content?: string
+  tag?: string
+  priority?: number
+  createStartDate?: string
+  createEndDate?: string
+  updateStartDate?: string
+  updateEndDate?: string
 }
 
 // 查询备忘录结果类型
-export interface MemoQueryResult  {
-  id: string;
-  username: string;
-  userId: string;
-  title: string;
-  content: string;
-  tag: string;
-  priority: number;
-  createTime: string;
-  updateTime: string;
+export interface MemoQueryResult {
+  id: string
+  username: string
+  userId: string
+  title: string
+  content: string
+  tag: string
+  priority: number
+  createTime: string
+  updateTime: string
 }

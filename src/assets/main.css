@@ -31,7 +31,7 @@ html, body {
 }
 
 ::-webkit-scrollbar-track-piece {
-    background: white;
+    background: #fafafa;
 }
 
 ::-webkit-scrollbar-thumb {
