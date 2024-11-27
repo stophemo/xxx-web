@@ -1,25 +1,41 @@
 <template>
   <ContentLayout>
     <div class="memo-container rounded-lg border border-gray-200">
-      <div class="memo-tab h-12 flex justify-between items-center sticky top-0 z-30 bg-[#f7f7f7]">
-        <el-checkbox class="px-4" v-if="editFlag" v-model="checkAll" :indeterminate="isIndeterminate" @change="handleCheckAllChange"> 全选 </el-checkbox>
-        <IconMenu v-if="!editFlag" class="px-4" />
+      <div v-if="!editFlag" class="memo-tab h-12 flex justify-between items-center sticky top-0 z-30 bg-[#f7f7f7]">
+        <IconMenu class="px-4" />
         <div class="right flex px-4 relative">
           <IconSearch class="mr-3" />
-
           <IconThreePoint @click="threePointMenuFlag = !threePointMenuFlag" v-click-outside="closeDropdown" />
-          <ul v-if="threePointMenuFlag" class="absolute right-0 top-8 border rounded-lg bg-white">
+          <ul v-if="threePointMenuFlag" class="absolute right-0 top-8 border rounded-lg bg-white cursor-pointer">
             <li class="px-5 py-2 font-thin text-[14px]" @click="openEdit">编辑</li>
             <li class="px-5 py-2 font-thin text-[14px]">查看</li>
           </ul>
         </div>
       </div>
+      <div v-if="editFlag" class="memo-tab h-12 flex justify-between items-center sticky top-0 z-30 bg-[#f7f7f7]">
+        <el-checkbox
+          class="p-4"
+          v-model="checkAll"
+          :indeterminate="isIndeterminate"
+          @change="handleCheckAllChange"
+        >
+          全选
+        </el-checkbox>
+
+        <div class="iconfont delete size-4" />
+        <IconClose class="mr-4 cursor-pointer" @click="closeEdit" />
+      </div>
 
       <div class="memo-list px-4 pt-5 h-screen overflow-auto" @scroll="debouncedHandleScroll">
         <!-- 卡片列表 -->
-        <div class="grid grid-cols-3 gap-4">
-          <MemoCard v-for="memo in memos" :key="memo.id" :memo="memo" :editFlag="editFlag" :onCheckedChange="handleCheckedCardsChange" />
-        </div>
+        <el-checkbox-group class="grid grid-cols-3 gap-4" v-model="checkedCards" @change="handleCheckedCardsChange">
+          <MemoCard
+            v-for="memo in memos"
+            :key="memo.id"
+            :memo="memo"
+            :editFlag="editFlag"
+          />
+        </el-checkbox-group>
 
         <!-- 加载中提示 -->
         <div v-if="isLoading" class="text-center mt-4 text-gray-500">正在加载中...</div>
@@ -48,6 +64,7 @@ import IconMenu from '@/components/icons/IconMenu.vue'
 import { debounce } from 'lodash'
 import IconSearch from '@/components/icons/IconSearch.vue'
 import IconThreePoint from '@/components/icons/IconThreePoint.vue'
+import IconClose from '@/components/icons/IconClose.vue'
 
 // 状态管理
 const memos = ref<MemoQueryResult[]>([]) // 已加载的备忘录
@@ -61,33 +78,33 @@ let preloadedData: MemoQueryResult[] = [] // 存储预加载数据
 const showScrollTopButton = ref<boolean>(false) // 是否显示滚动到顶部按钮
 const threePointMenuFlag = ref<boolean>(false)
 const editFlag = ref<boolean>(false)
-const checkAll = ref(false)
-const isIndeterminate = ref(true)
 const checkedCards = ref<string[]>([])
+const isIndeterminate = ref(false)
+const checkAll = ref(false)
 
-const closeDropdown = () => {
-  threePointMenuFlag.value = false
-}
+// 编辑  全选处理
 const openEdit = () => {
   editFlag.value = true
+}
+const closeEdit = () => {
+  editFlag.value = false
+  checkedCards.value = []
+  checkAll.value = false
 }
 const handleCheckAllChange = (val: boolean) => {
   checkedCards.value = val ? memos.value.map(memo => memo.id) : []
   isIndeterminate.value = false
-
-  console.log('选中的卡片：', checkedCards.value)
+  checkAll.value = checkedCards.value.length === memos.value.length
 }
-const handleCheckedCardsChange = (id: string, chekced: boolean) => {
-  if (chekced) {
-    checkedCards.value.push(id)
-  } else {
-    checkedCards.value = checkedCards.value.filter(cardId => cardId !== id)
-  }
-  const checkedCount = checkedCards.value.length
+const handleCheckedCardsChange = (value: string[]) => {
+  const checkedCount = value.length
   checkAll.value = checkedCount === memos.value.length
   isIndeterminate.value = checkedCount > 0 && checkedCount < memos.value.length
+}
 
-  console.log('选中的卡片：', checkedCards.value)
+// 三点菜单关闭
+const closeDropdown = () => {
+  threePointMenuFlag.value = false
 }
 
 // 滚动加载方法

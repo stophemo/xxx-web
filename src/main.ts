@@ -3,6 +3,7 @@ import { createPinia } from 'pinia';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 import './assets/main.css';
+import './assets/iconfont/iconfont.js';
 import App from './App.vue';
 import router from './router';
 import clickOutside from '@/directives/click-outside';
